@@ -11,12 +11,12 @@ public class Player extends GameObject {
 	private Vector3f position;
 
 	private static float[] vertices = {
-			0f, 0f, 0f,
-			0f, 0f, 0f,
-			0f, 0f, 0f,
-			0f, 0f, 0f
+			-1.0f, -0.9f, 0.0f,
+			-1.0f, -1.0f, 0.0f,
+			-0.9f, -1.0f, 0.0f,
+			-0.9f, -0.9f, 0.0f
 	};
-	
+
 	private static byte[] indices = {
 			0, 1, 2,
 			2, 3, 0
