@@ -22,6 +22,4 @@ public class Index2D {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
 }

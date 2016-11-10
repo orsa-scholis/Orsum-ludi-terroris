@@ -35,4 +35,23 @@ public class QuadController {
 	public int getHeight() {
 		return height;
 	}
+	
+	@Override
+	public String toString() {
+		String retString = "QuadController, field:";
+		int row = 0;
+		for (int y = height - 1; y >= 0; y--) {
+			for (int x = 0; x < width; x++) {
+				Quad quad = quadAtIndex(new Index2D(x, y));
+				if (quad.getIndex().getY() != row) {
+					retString += "\n|";
+					row = quad.getIndex().getY();
+				}
+				
+				retString += quad.isObstacle() ? "x|" : " |";
+			}
+		}
+		
+		return retString;
+	}
 }
