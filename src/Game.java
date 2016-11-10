@@ -3,11 +3,14 @@ import java.util.ArrayList;
 import gameEnginge.Field;
 import gameEnginge.Monster;
 import gameEnginge.Player;
+import graphicEngine.ShaderManager;
 
 public class Game {
 	private Player player;
 	private ArrayList<Monster> monsters;
 	private ArrayList<Field> fields;
+
+	public ShaderManager shaderManager;
 
 	private int width = 720;
 	private int height = 720;
@@ -15,19 +18,21 @@ public class Game {
 	public Game() {
 		monsters = new ArrayList<>();
 		fields = new ArrayList<>();
+		shaderManager = new ShaderManager();
 	}
 
 	public void init() {
+		shaderManager.loadAll();
 		for (float i = 0; i < 20; i++) {
 			for (float j = 0; j < 20; j++) {
 
-				float[] vertices = { 
+				float[] vertices = {
 						i / 10f - 1f, j / 10f - 0.9f, 0f,
 						i / 10f - 1f, j / 10f - 1f, 0f,
 						i / 10f - 0.9f,	j / 10f - 1f, 0f,
 						i / 10f - 0.9f, j / 10f - 0.9f, 0f, };
 
-				byte[] indices = { 
+				byte[] indices = {
 						0, 1, 2,
 						2, 3, 0 };
 
@@ -64,7 +69,12 @@ public class Game {
 		for (Field field : fields) {
 			field.draw();
 		}
-
+		shaderManager.shaderPlayer.start();
+		player.draw();
+		shaderManager.shaderPlayer.stop();
+		for (Monster monster : monsters){
+			monster.draw();
+		}
 	}
 
 	public int getHeight() {
