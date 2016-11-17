@@ -20,19 +20,19 @@ public class GameGraphic {
 		this.driver = driver;
 		monsters = new ArrayList<>();
 		fields = new ArrayList<>();
-		int[][] field = new int[][] {
-			{ 0, 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 0, 1, 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 1, 1, 0, 0, 1, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 0, 0, 0, 0 }
-		};
+//		int[][] field = new int[][] {
+//			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+//			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+//			{ 0, 0, 1, 0, 0, 0, 0, 0 },
+//			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+//			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+//			{ 0, 1, 1, 0, 0, 1, 0, 0 },
+//			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+//			{ 0, 0, 0, 0, 0, 0, 0, 0 }
+//		};
 
-		Game game = new Game(field);
-		System.out.println(game.getQuadController());
+		//Game game = new Game(field);
+		//System.out.println(game.getQuadController());
 	}
 
 	public void init() {
@@ -77,13 +77,13 @@ public class GameGraphic {
 		ShaderManager.shaderPlayer.setUniform3f("pos", player.position);
 		player.draw();
 		ShaderManager.shaderPlayer.stop();
-		ShaderManager.shaderMonster.start();
+		//ShaderManager.shaderMonster.start();
 
 		for (Monster monster : monsters){
 			monster.draw();
-			ShaderManager.shaderMonster.setUniform3f("pos", monster.getPosition());
+			//ShaderManager.shaderMonster.setUniform3f("pos", monster.getPosition());
 		}
-		ShaderManager.shaderMonster.stop();
+		//ShaderManager.shaderMonster.stop();
 	}
 
 	public int getHeight() {
