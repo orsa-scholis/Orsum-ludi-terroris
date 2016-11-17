@@ -23,7 +23,7 @@ public class Driver implements Runnable {
 	@SuppressWarnings("unused")
 	private GLFWCursorPosCallback cursorCallback;
 
-	private Game game;
+	private GameGraphic game;
 
 	public void start(){
 		thread = new Thread(this, "Game");
@@ -31,7 +31,7 @@ public class Driver implements Runnable {
 	}
 
 	private void init(){
-		game = new Game(this);
+		game = new GameGraphic(this);
 		running = true;
 		if(!glfwInit()){
 			System.err.println("Initialisierung fehlgeschlagen!");

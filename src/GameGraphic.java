@@ -4,8 +4,9 @@ import gameEnginge.Field;
 import gameEnginge.Monster;
 import gameEnginge.Player;
 import graphicEngine.ShaderManager;
+import logic.Game;
 
-public class Game {
+public class GameGraphic {
 	private Driver driver;
 	private Player player;
 	private ArrayList<Monster> monsters;
@@ -15,10 +16,23 @@ public class Game {
 	private int width = 1000;
 	private int height = 1000;
 
-	public Game(Driver driver) {
+	public GameGraphic(Driver driver) {
 		this.driver = driver;
 		monsters = new ArrayList<>();
 		fields = new ArrayList<>();
+		int[][] field = new int[][] {
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 1, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 1, 1, 0, 0, 1, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 }
+		};
+
+		Game game = new Game(field);
+		System.out.println(game.getQuadController());
 	}
 
 	public void init() {
