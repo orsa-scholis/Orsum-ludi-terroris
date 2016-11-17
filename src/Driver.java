@@ -7,21 +7,22 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
-import gameEnginge.Field;
 import input.KeyboardInput;
 import input.MouseInput;
 
-public class Driver implements Runnable{
+public class Driver implements Runnable {
 
 	private Thread thread;
 	private boolean running = false;
 
 	public long windows;
+	public boolean flag;
 
+	@SuppressWarnings("unused")
 	private GLFWKeyCallback keyCallback;
+	@SuppressWarnings("unused")
 	private GLFWCursorPosCallback cursorCallback;
 
-	private Field field;
 	private Game game;
 
 	public void start(){
@@ -30,7 +31,7 @@ public class Driver implements Runnable{
 	}
 
 	private void init(){
-		game = new Game();
+		game = new Game(this);
 		running = true;
 		if(!glfwInit()){
 			System.err.println("Initialisierung fehlgeschlagen!");
@@ -56,30 +57,32 @@ public class Driver implements Runnable{
 
 	public void run(){
 		init();
-		long lastTime = System.nanoTime();
-		double delta = 0.0;
-		double ns = 1000000000.0 / 60.0;
-		long timer = System.currentTimeMillis();
-		int updates = 0;
-		int frames = 0;
+//		long lastTime = System.nanoTime();
+//		double delta = 0.0;
+//		double ns = 1000000000.0 / 60.0;
+//		long timer = System.currentTimeMillis();
+//		int updates = 0;
+//		int frames = 0;
 
 		while(running){
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
+//			long now = System.nanoTime();
+//			delta += (now - lastTime) / ns;
+//			lastTime = now;
+//
+//			if(delta >= 1.0){
+//				update();
+//				updates++;
+//				delta--;
+//			}
+//			render();
+//			frames++;
+//			if(System.currentTimeMillis() - timer > 1000){
+//				timer += 1000;
+//				System.out.println(updates + " UPS, " + frames + " FPS");
+//			}
+			while(!flag){
 
-			if(delta >= 1.0){
-				update();
-				updates++;
-				delta--;
 			}
-			render();
-			frames++;
-			if(System.currentTimeMillis() - timer > 1000){
-				timer += 1000;
-				System.out.println(updates + " UPS, " + frames + " FPS");
-			}
-
 			if(glfwWindowShouldClose(windows)){
 				running = false;
 			}
@@ -105,7 +108,5 @@ public class Driver implements Runnable{
 
 	public static void main(String[] args) {
 		new Driver().start();
-
 	}
-
 }

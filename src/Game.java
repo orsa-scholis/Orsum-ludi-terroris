@@ -6,28 +6,31 @@ import gameEnginge.Player;
 import graphicEngine.ShaderManager;
 
 public class Game {
+	private Driver driver;
 	private Player player;
 	private ArrayList<Monster> monsters;
 	private ArrayList<Field> fields;
+	private ArrayList<Field> obstacles;
 
-	private int width = 720;
-	private int height = 720;
+	private int width = 1000;
+	private int height = 1000;
 
-	public Game() {
+	public Game(Driver driver) {
+		this.driver = driver;
 		monsters = new ArrayList<>();
 		fields = new ArrayList<>();
 	}
 
 	public void init() {
 		ShaderManager.loadAll();
-		for (float i = 0; i < 20; i++) {
-			for (float j = 0; j < 20; j++) {
+		for (float i = 0; i < 8; i++) {
+			for (float j = 0; j < 8; j++) {
 
 				float[] vertices = {
-						i / 10f - 1f, j / 10f - 0.9f, 0f,
-						i / 10f - 1f, j / 10f - 1f, 0f,
-						i / 10f - 0.9f,	j / 10f - 1f, 0f,
-						i / 10f - 0.9f, j / 10f - 0.9f, 0f, };
+						i / 4f - 1f, j / 4f - 0.75f, 0f,
+						i / 4f - 1f, j / 4f - 1f, 0f,
+						i / 4f - 0.75f,	j / 4f - 1f, 0f,
+						i / 4f - 0.75f, j / 4f - 0.75f, 0f, };
 
 				byte[] indices = {
 						0, 1, 2,
@@ -37,7 +40,11 @@ public class Game {
 				fields.add(field);
 			}
 		}
+
+
+
 		player = new Player();
+
 	}
 
 	public void update() {

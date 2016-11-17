@@ -5,14 +5,12 @@ import input.KeyboardInput;
 import utils.Vector3f;
 import static org.lwjgl.glfw.GLFW.*;
 
-import com.sun.javafx.scene.KeyboardShortcutsHandler;
-
 public class Player extends GameObject {
 
 	private VertexArrayObject vao;
 	public Vector3f position;
 
-	private static float[] vertices = { -1.0f, -0.9f, 0.0f, -1.0f, -1.0f, 0.0f, -0.9f, -1.0f, 0.0f, -0.9f, -0.9f,
+	private static float[] vertices = { -1.0f, -0.75f, 0.0f, -1.0f, -1.0f, 0.0f, -0.75f, -1.0f, 0.0f, -0.75f, -0.75f,
 			0.0f };
 
 	private static byte[] indices = { 0, 1, 2, 2, 3, 0 };
@@ -50,7 +48,6 @@ public class Player extends GameObject {
 				position.x = 0.0f;
 			}
 		}
-
 	}
 
 }
