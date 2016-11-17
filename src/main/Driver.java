@@ -81,7 +81,7 @@ public class Driver implements Runnable {
 			frames++;
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				System.out.println(updates + " UPS, " + frames + " FPS");
+				//System.out.println(updates + " UPS, " + frames + " FPS");
 			}
 			if(glfwWindowShouldClose(windows)){
 				running = false;

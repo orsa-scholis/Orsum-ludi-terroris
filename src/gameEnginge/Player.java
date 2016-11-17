@@ -33,27 +33,32 @@ public class Player extends GameObject {
 
 	public void update() {
 		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
-			if(driver.game.movCont.isThereObstacle(this, position.x, position.y + 0.01f)){
-
-            }
-			if ((position.y += 0.01f) > 1.75f) {
-				position.y = 1.75f;
+			if(!driver.game.movCont.isThereObstacle(this, position.x, position.y + 0.005f)){
+                if ((position.y += 0.01f) > 1.75f) {
+                    position.y = 1.75f;
+                }
 			}
 		}
 		if (KeyboardInput.isKeyDown(GLFW_KEY_S)) {
-			if ((position.y -= 0.01f) < 0.0f) {
-				position.y = 0.0f;
-			}
+            if(!driver.game.movCont.isThereObstacle(this, position.x, position.y - 0.005f)) {
+                if ((position.y -= 0.01f) < 0.0f) {
+                    position.y = 0.0f;
+                }
+            }
 		}
 		if (KeyboardInput.isKeyDown(GLFW_KEY_D)) {
-			if((position.x += 0.01f) > 1.75f){
-				position.x = 1.75f;
-			}
+            if(!driver.game.movCont.isThereObstacle(this, position.x + 0.005f, position.y)) {
+                if ((position.x += 0.01f) > 1.75f) {
+                    position.x = 1.75f;
+                }
+            }
 		}
 		if (KeyboardInput.isKeyDown(GLFW_KEY_A)) {
-			if((position.x -= 0.01f) < 0.0f){
-				position.x = 0.0f;
-			}
+            if(!driver.game.movCont.isThereObstacle(this, position.x  - 0.005f, position.y)) {
+                if ((position.x -= 0.01f) < 0.0f) {
+                    position.x = 0.0f;
+                }
+            }
 		}
 	}
 
