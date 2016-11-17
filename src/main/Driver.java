@@ -1,3 +1,4 @@
+package main;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -9,6 +10,7 @@ import org.lwjgl.opengl.GL;
 
 import input.KeyboardInput;
 import input.MouseInput;
+import logic.Game;
 
 public class Driver implements Runnable {
 
@@ -23,7 +25,7 @@ public class Driver implements Runnable {
 	@SuppressWarnings("unused")
 	private GLFWCursorPosCallback cursorCallback;
 
-	private GameGraphic game;
+	public GameGraphic game;
 
 	public void start(){
 		thread = new Thread(this, "Game");
@@ -33,6 +35,7 @@ public class Driver implements Runnable {
 	private void init(){
 		game = new GameGraphic(this);
 		running = true;
+		flag = false;
 		if(!glfwInit()){
 			System.err.println("Initialisierung fehlgeschlagen!");
 		}
@@ -59,7 +62,7 @@ public class Driver implements Runnable {
 		init();
 		long lastTime = System.nanoTime();
 		double delta = 0.0;
-		double ns = 1000000000.0 / 60.0;
+		double ns = 1000000000.0 / 30.0;
 		long timer = System.currentTimeMillis();
 		int updates = 0;
 		int frames = 0;
@@ -79,9 +82,6 @@ public class Driver implements Runnable {
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
 				System.out.println(updates + " UPS, " + frames + " FPS");
-			}
-			while(!flag){
-
 			}
 			if(glfwWindowShouldClose(windows)){
 				running = false;
