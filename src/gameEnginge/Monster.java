@@ -18,31 +18,39 @@ public class Monster extends GameObject {
 			0f, 0f, 0f,
 			0f, 0f, 0f
 	};
-	
+
 	private static byte[] indices = {
 			0, 1, 2,
 			2, 3, 0
 	};
-	
+
 
 	public Monster() {
 		super(vertices, indices);
-		position = new Vector3f();
+		setPosition(new Vector3f());
 	}
 
 	public Monster(float[] vertices, byte[] indices) {
 		super(vertices, indices);
 		this.vertices = vertices;
 		this.indices = indices;
-		position = new Vector3f();
+		setPosition(new Vector3f());
 	}
 
 	public void update() {
-		if (KeyboardInput.isKeyDown(GLFW_KEY_W)&& position.y < 1.0) {
-			position.y += 0.1f;
+		if (KeyboardInput.isKeyDown(GLFW_KEY_W)&& getPosition().y < 1.0) {
+			getPosition().y += 0.1f;
 		}
-		if (KeyboardInput.isKeyDown(GLFW_KEY_S)&& position.y > -1.0) {
-			position.y -= 0.1f;
+		if (KeyboardInput.isKeyDown(GLFW_KEY_S)&& getPosition().y > -1.0) {
+			getPosition().y -= 0.1f;
 		}
+	}
+
+	public Vector3f getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vector3f position) {
+		this.position = position;
 	}
 }

@@ -49,15 +49,36 @@ public class Driver implements Runnable{
 		glfwMakeContextCurrent(windows);
 		glfwShowWindow(windows);
 		GL.createCapabilities();
+		glViewport(0, 0, game.getWidth(), game.getHeight());
 
 		game.init();
 	}
 
 	public void run(){
 		init();
+		long lastTime = System.nanoTime();
+		double delta = 0.0;
+		double ns = 1000000000.0 / 60.0;
+		long timer = System.currentTimeMillis();
+		int updates = 0;
+		int frames = 0;
+
 		while(running){
-			update();
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+
+			if(delta >= 1.0){
+				update();
+				updates++;
+				delta--;
+			}
 			render();
+			frames++;
+			if(System.currentTimeMillis() - timer > 1000){
+				timer += 1000;
+				System.out.println(updates + " UPS, " + frames + " FPS");
+			}
 
 			if(glfwWindowShouldClose(windows)){
 				running = false;
@@ -67,6 +88,9 @@ public class Driver implements Runnable{
 
 	private void update(){
 		glfwPollEvents();
+
+		game.update();
+
 		if(KeyboardInput.isKeyDown(GLFW_KEY_SPACE)){
 			System.out.println("Space is pressed!   ");
 

@@ -5,22 +5,17 @@ import input.KeyboardInput;
 import utils.Vector3f;
 import static org.lwjgl.glfw.GLFW.*;
 
+import com.sun.javafx.scene.KeyboardShortcutsHandler;
+
 public class Player extends GameObject {
 
 	private VertexArrayObject vao;
-	private Vector3f position;
+	public Vector3f position;
 
-	private static float[] vertices = {
-			-1.0f, -0.9f, 0.0f,
-			-1.0f, -1.0f, 0.0f,
-			-0.9f, -1.0f, 0.0f,
-			-0.9f, -0.9f, 0.0f
-	};
+	private static float[] vertices = { -1.0f, -0.9f, 0.0f, -1.0f, -1.0f, 0.0f, -0.9f, -1.0f, 0.0f, -0.9f, -0.9f,
+			0.0f };
 
-	private static byte[] indices = {
-			0, 1, 2,
-			2, 3, 0
-	};
+	private static byte[] indices = { 0, 1, 2, 2, 3, 0 };
 
 	public Player() {
 		super(vertices, indices);
@@ -35,12 +30,27 @@ public class Player extends GameObject {
 	}
 
 	public void update() {
-		if (KeyboardInput.isKeyDown(GLFW_KEY_W)&& position.y < 1.0) {
-			position.y += 0.1f;
+		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
+			if ((position.y += 0.01f) > 1.9f) {
+				position.y = 1.9f;
+			}
 		}
-		if (KeyboardInput.isKeyDown(GLFW_KEY_S)&& position.y > -1.0) {
-			position.y -= 0.1f;
+		if (KeyboardInput.isKeyDown(GLFW_KEY_S)) {
+			if ((position.y -= 0.01f) < 0.0f) {
+				position.y = 0.0f;
+			}
 		}
+		if (KeyboardInput.isKeyDown(GLFW_KEY_D)) {
+			if((position.x += 0.01f) > 1.9f){
+				position.x = 1.9f;
+			}
+		}
+		if (KeyboardInput.isKeyDown(GLFW_KEY_A)) {
+			if((position.x -= 0.01f) < 0.0f){
+				position.x = 0.0f;
+			}
+		}
+
 	}
 
 }

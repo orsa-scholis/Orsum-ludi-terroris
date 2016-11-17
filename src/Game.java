@@ -10,19 +10,16 @@ public class Game {
 	private ArrayList<Monster> monsters;
 	private ArrayList<Field> fields;
 
-	public ShaderManager shaderManager;
-
 	private int width = 720;
 	private int height = 720;
 
 	public Game() {
 		monsters = new ArrayList<>();
 		fields = new ArrayList<>();
-		shaderManager = new ShaderManager();
 	}
 
 	public void init() {
-		shaderManager.loadAll();
+		ShaderManager.loadAll();
 		for (float i = 0; i < 20; i++) {
 			for (float j = 0; j < 20; j++) {
 
@@ -40,20 +37,6 @@ public class Game {
 				fields.add(field);
 			}
 		}
-		for (Field field : fields) {
-			System.out.println("\nNew Field:");
-			int i = 0;
-			for (Float floaty : field.getVertices()) {
-				if(i < 3) {
-					System.out.print(floaty + " : ");
-					i++;
-				}
-				else{
-					System.out.println("");
-					i = 0;
-				}
-			}
-		}
 		player = new Player();
 	}
 
@@ -69,12 +52,17 @@ public class Game {
 		for (Field field : fields) {
 			field.draw();
 		}
-		shaderManager.shaderPlayer.start();
+		ShaderManager.shaderPlayer.start();
+		ShaderManager.shaderPlayer.setUniform3f("pos", player.position);
 		player.draw();
-		shaderManager.shaderPlayer.stop();
+		ShaderManager.shaderPlayer.stop();
+		ShaderManager.shaderMonster.start();
+
 		for (Monster monster : monsters){
 			monster.draw();
+			ShaderManager.shaderMonster.setUniform3f("pos", monster.getPosition());
 		}
+		ShaderManager.shaderMonster.stop();
 	}
 
 	public int getHeight() {
