@@ -33,7 +33,7 @@ public class Driver implements Runnable {
 	}
 
 	private void init(){
-		game = new GameGraphic(this);
+		game = new GameGraphic(this, 8);
 		running = true;
 		flag = false;
 		if(!glfwInit()){
@@ -62,7 +62,7 @@ public class Driver implements Runnable {
 		init();
 		long lastTime = System.nanoTime();
 		double delta = 0.0;
-		double ns = 1000000000.0 / 30.0;
+		double ns = 1000000000.0 / 10.0;
 		long timer = System.currentTimeMillis();
 		int updates = 0;
 		int frames = 0;

@@ -5,12 +5,12 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 
 import graphicEngine.VertexArrayObject;
 import input.KeyboardInput;
+import main.Driver;
 import utils.Vector3f;
 
 public class Monster extends GameObject {
 
 	private VertexArrayObject vao;
-	private Vector3f position;
 
 	private static float[] vertices = {
 			0f, 0f, 0f,
@@ -24,14 +24,8 @@ public class Monster extends GameObject {
 			2, 3, 0
 	};
 
-
-	public Monster() {
-		super(vertices, indices);
-		setPosition(new Vector3f());
-	}
-
-	public Monster(float[] vertices, byte[] indices) {
-		super(vertices, indices);
+	public Monster(float[] vertices, byte[] indices, Driver driver) {
+		super(vertices, indices, 3, driver);
 		this.vertices = vertices;
 		this.indices = indices;
 		setPosition(new Vector3f());

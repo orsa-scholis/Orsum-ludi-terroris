@@ -2,42 +2,72 @@ package gameEnginge;
 
 import main.GameGraphic;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 /**
  * Created by Philipp on 17/11/2016.
  */
 public class MovementController {
 
-    private GameGraphic gamegraphic;
-    private NumberFormat nf;
+    private static GameGraphic gamegraphic;
+
+    public static int UP = 0;
+    public static int DOWN = 2;
+    public static int RIGHT = 1;
+    public static int LEFT = 3;
+
 
     public MovementController(GameGraphic gg){
         gamegraphic = gg;
-        nf = NumberFormat.getCurrencyInstance(Locale.GERMAN);
     }
 
-    public boolean isThereObstacle(GameObject gm, float x, float y){
-        int i = Math.abs((int) ( x / 0.125));
-        if(x % 0.125 != 0){
-            System.out.println("x: " + nf.format(x % 0.125));
-            //i--;
+    public boolean move(GameObject gm, int direction){
+        int posX = gm.getPositionX();
+        int posY = gm.getPositionY();
+        switch (direction) {
+            case 0:
+                if (isThereNoObstacle(posX, posY + 1)) {
+                    if ((posY += 1) > gamegraphic.getGameSize()) {
+                        posY = gamegraphic.getGameSize();
+                    }
+                }
+                break;
+            case 1:
+                if (isThereNoObstacle(posX + 1, posY)) {
+                    if ((posX += 1) > gamegraphic.getGameSize()) {
+                        posX = gamegraphic.getGameSize();
+                    }
+                }
+                break;
+            case 2:
+                if (isThereNoObstacle(posX, posY - 1)) {
+                    if ((posY -= 1) < 0) {
+                        posY = 0;
+                    }
+                }
+                break;
+            case 3:
+                if (isThereNoObstacle(posX - 1, posY)) {
+                    if ((posX -= 1) < 0) {
+                        posX = 0;
+                    }
+                }
+                break;
+            default:
+                return false;
         }
-        int j = Math.abs((int) ( y / 0.125));
-        if(y % 0.125 != 0){
-            System.out.println("y: " + nf.format(y % 0.125));
-            //j--;
-        }
-        else{
+        gm.updatePosition(posX, posY);
+        return true;
+    }
 
+    public boolean isThereNoObstacle(int x, int y){
+        if(x < 0 || y < 0 || x > gamegraphic.getGameSize() -1 || y > gamegraphic.getGameSize() -1 ){
+            return false;
         }
-
-        if(gamegraphic.getField()[i][j] == 1){
-            return true;
+        if(gamegraphic.getField()[y][x] == 1){
+            System.out.println(gamegraphic.getField()[x][y] + " " + x + " " + y);
+            return false;
         }
-
-        return false;
+        System.out.println(gamegraphic.getField()[x][y] + " " + x + " " + y);
+        return true;
     }
 
 
