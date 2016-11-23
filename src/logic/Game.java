@@ -5,7 +5,8 @@ public class Game {
 
 	/**
 	 * Game constructor
-	 * @param field	Represents the field. A 0 represents an empty space, while 1 represents an obstacle
+	 * @param field	Represents the field. A 0 represents an empty space, while 1 represents an obstacle. 
+	 * The origin ((0, 0)-Index) is in the bottom left corner
 	 */
 	public Game(int[][] field) {
 		super();
