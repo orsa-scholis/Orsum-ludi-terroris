@@ -112,9 +112,8 @@ public class QuadController {
 					Quad quad = quadAtIndex(new Index2D(x, j));
 					if (quad.isObstacle()) {
 						hasObstacle = true;
+						break;
 					}
-					
-					break;
 				}
 				
 				// exit outer loop

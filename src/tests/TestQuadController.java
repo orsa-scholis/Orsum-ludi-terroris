@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import logic.graph.Point;
 import logic.Game;
+import logic.graph.*;
 
 public class TestQuadController {
 	
@@ -17,6 +17,7 @@ public class TestQuadController {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	@AfterClass
@@ -54,7 +55,10 @@ public class TestQuadController {
 				new Point(1.0/8.0, 2.5/8.0),
 				new Point(1.0/8.0, 3.5/8.0),
 				new Point(4.0/8.0, 4.0/8.0),
-				new Point(4.0/8.0, 4.0/8.0)
+				new Point(4.0/8.0, 4.0/8.0),
+				new Point(0.0/8.0, 0.0/8.0),
+				new Point(0.0/8.0, 0.0/8.0),
+				new Point(1.0/8.0, 7.0/8.0)
 		};
 		
 		Point[] point2s = new Point[] {
@@ -63,11 +67,14 @@ public class TestQuadController {
 				new Point(3.0/8.0, 2.5/8.0),
 				new Point(3.0/8.0, 3.5/8.0),
 				new Point(4.0/8.0, 6.0/8.0),
-				new Point(1.0/8.0, 7.0/8.0)
+				new Point(1.0/8.0, 7.0/8.0),
+				new Point(2.0/8.0, 7.0/8.0),
+				new Point(1.0/8.0, 7.0/8.0),
+				new Point(0.0/8.0, 0.0/8.0)
 		};
 		
 		boolean[] solutions = new boolean[] {
-				false, true, true, false, false, true
+				false, true, true, false, false, true, true, false, false
 		};
 		
 		for (int i = 0; i < point1s.length; i++) {
