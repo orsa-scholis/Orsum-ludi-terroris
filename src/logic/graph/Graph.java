@@ -1,4 +1,4 @@
-package graph;
+package logic.graph;
 
 public class Graph {
 	private Node root;

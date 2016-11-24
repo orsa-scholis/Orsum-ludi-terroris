@@ -1,4 +1,4 @@
-package graph;
+package logic.graph;
 
 import java.lang.ref.WeakReference;
 
