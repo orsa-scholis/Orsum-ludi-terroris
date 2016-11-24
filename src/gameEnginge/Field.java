@@ -1,10 +1,9 @@
 package gameEnginge;
 
-import graphicEngine.VertexArrayObject;
+import main.Driver;
+import utils.Vector3f;
 
 public class Field extends GameObject{
-	
-	private VertexArrayObject vao;
 	
 	private float[] vertices = {
 			0f, 0f, 0f,
@@ -18,13 +17,10 @@ public class Field extends GameObject{
 			2, 3, 0
 	};
 	
-	public Field(float[] vertices, byte[] indices){
-		super(vertices, indices);
-		this.vertices = vertices;
-		this.indices = indices;
-	}
-	
-	public float[] getVertices(){
-		return vertices;
-	}
+	public Field(float[] vertices, byte[] indices, int isOb, Driver driver) {
+        super(vertices, indices, isOb, driver);
+        this.vertices = vertices;
+        this.indices = indices;
+        position = new Vector3f();
+    }
 }
