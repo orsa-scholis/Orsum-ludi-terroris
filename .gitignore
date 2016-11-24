@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 .metadata/*
-=======
 .DS_Store
 ._*
+.metadata*
 .idea/*
->>>>>>> logic

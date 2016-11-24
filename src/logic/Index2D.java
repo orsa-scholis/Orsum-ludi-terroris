@@ -22,4 +22,9 @@ public class Index2D {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	@Override
+	public String toString() {
+		return "Index2D [x=" + x + ", y=" + y + "]";
+	}
 }
