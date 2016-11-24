@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import graph.Point;
+import logic.graph.Point;
 import logic.Game;
 
 public class TestQuadController {

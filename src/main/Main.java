@@ -1,6 +1,6 @@
 package main;
 
-import graph.Point;
+import logic.graph.*;
 import logic.*;
 
 public class Main {

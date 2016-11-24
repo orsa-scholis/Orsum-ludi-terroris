@@ -1,8 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
-
-import graph.Point;
+import logic.graph.Point;
 
 public class QuadController {
 	private ArrayList<Quad> quads = new ArrayList<>();
@@ -60,8 +59,9 @@ public class QuadController {
 			// Querlinie
 			
 			// Immer bei dem tieferen X-Wert anfangen
+			Index2D oldStartIndex = startIndex;
 			startIndex = startIndex.getX() < endIndex.getX() ? startIndex : endIndex;
-			endIndex = startIndex.getX() > endIndex.getX() ? startIndex : endIndex;
+			endIndex = oldStartIndex.getX() > endIndex.getX() ? oldStartIndex : endIndex;
 			
 			LinearFunction function = new LinearFunction(
 					new Point(start.getX() * width, start.getY() * height), 

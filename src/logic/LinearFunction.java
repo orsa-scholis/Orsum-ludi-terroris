@@ -1,6 +1,6 @@
 package logic;
 
-import graph.Point;
+import logic.graph.Point;
 
 public class LinearFunction {
 	private float m;
