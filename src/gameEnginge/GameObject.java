@@ -4,8 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
-import java.util.Observable;
-
 import graphicEngine.VertexArrayObject;
 import main.Driver;
 import utils.Vector3f;
@@ -55,18 +53,15 @@ public class GameObject {
         positionX = posX;
         positionY = posY;
 
-        position.x = positionX * driver.game.getFieldSize();
-        System.out.println(positionX * driver.game.getFieldSize());
-        position.y = positionY * driver.game.getFieldSize();
-        System.out.println(positionY * driver.game.getFieldSize());
+        position.x = positionX * driver.gameG.getFieldSize();
+        System.out.println(positionX * driver.gameG.getFieldSize());
+        position.y = positionY * driver.gameG.getFieldSize();
+        System.out.println(positionY * driver.gameG.getFieldSize());
 
     }
 
-    public int getGoType() {
-        return goType;
-    }
+    public int getGoType() {return goType; }
 
-    public void update() {
+    public void update() {};
 
-    }
 }

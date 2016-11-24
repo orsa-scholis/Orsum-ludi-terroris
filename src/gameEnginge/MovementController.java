@@ -20,20 +20,21 @@ public class MovementController {
     }
 
     public boolean move(GameObject gm, int direction){
+        System.out.println("-------------Move----------------");
         int posX = gm.getPositionX();
         int posY = gm.getPositionY();
         switch (direction) {
             case 0:
                 if (isThereNoObstacle(posX, posY + 1)) {
-                    if ((posY += 1) > gamegraphic.getGameSize()) {
-                        posY = gamegraphic.getGameSize();
+                    if ((posY += 1) > gamegraphic.getGameSize()-1) {
+                        posY = gamegraphic.getGameSize()-1;
                     }
                 }
                 break;
             case 1:
                 if (isThereNoObstacle(posX + 1, posY)) {
-                    if ((posX += 1) > gamegraphic.getGameSize()) {
-                        posX = gamegraphic.getGameSize();
+                    if ((posX += 1) > gamegraphic.getGameSize()-1) {
+                        posX = gamegraphic.getGameSize()-1;
                     }
                 }
                 break;

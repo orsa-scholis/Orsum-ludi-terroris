@@ -17,10 +17,12 @@ public class Player extends GameObject {
 	public Player(Driver driver) {
 		super(vertices, indices, 2, driver);
 		position = new Vector3f();
-        mvC = driver.game.getMovCont();
+        mvC = driver.gameG.getMovCont();
 	}
 
+	@Override
 	public void update() {
+		System.out.println("Update Player!! ---------------");
 		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
             mvC.move(this, mvC.UP);
 		}

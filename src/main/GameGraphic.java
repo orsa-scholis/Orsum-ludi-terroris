@@ -7,7 +7,7 @@ import graphicEngine.ShaderManager;
 public class GameGraphic {
 	private Driver driver;
     private MovementController movCont;
-	private Player player;
+	private int playerID;
     private ArrayList<GameObject> objects;
     private int[][] field;
     private int gameSize;
@@ -66,7 +66,7 @@ public class GameGraphic {
                         break;
                     case 2:
                         tmp = new Player(driver);
-                        player = (Player)tmp;
+                        playerID = objects.size();
                         break;
                     case 3:
                         tmp = new Monster(vertices, indices, driver);
@@ -79,12 +79,11 @@ public class GameGraphic {
 			}
 		}
 
-		player = new Player(driver);
-
 	}
 
 	public void update() {
-        player.update();
+        System.out.println("Update gameG");
+        objects.get(playerID).update();
 	}
 
 	public void draw() {
@@ -102,8 +101,8 @@ public class GameGraphic {
                     break;
                 case 2:
                     ShaderManager.shaderPlayer.start();
-                    ShaderManager.shaderPlayer.setUniform3f("pos", player.position);
-                    player.draw();
+                    ShaderManager.shaderPlayer.setUniform3f("pos", gmO.position);
+                    gmO.draw();
                     ShaderManager.shaderPlayer.stop();
                     break;
                 case 3:

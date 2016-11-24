@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL;
 
 import input.KeyboardInput;
 import input.MouseInput;
-import logic.Game;
 
 public class Driver implements Runnable {
 
@@ -25,7 +24,7 @@ public class Driver implements Runnable {
 	@SuppressWarnings("unused")
 	private GLFWCursorPosCallback cursorCallback;
 
-	public GameGraphic game;
+	public GameGraphic gameG;
 
 	public void start(){
 		thread = new Thread(this, "Game");
@@ -33,7 +32,7 @@ public class Driver implements Runnable {
 	}
 
 	private void init(){
-		game = new GameGraphic(this, 8);
+		gameG = new GameGraphic(this, 8);
 		running = true;
 		flag = false;
 		if(!glfwInit()){
@@ -41,7 +40,7 @@ public class Driver implements Runnable {
 		}
 
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		windows = glfwCreateWindow(game.getWidth(), game.getHeight(), "Monstergame", NULL, NULL);
+		windows = glfwCreateWindow(gameG.getWidth(), gameG.getHeight(), "Monstergame", NULL, NULL);
 
 		if(windows == NULL){
 			System.err.println("Fenster konnte nicht erstellt werden!");
@@ -53,9 +52,10 @@ public class Driver implements Runnable {
 		glfwMakeContextCurrent(windows);
 		glfwShowWindow(windows);
 		GL.createCapabilities();
-		glViewport(0, 0, game.getWidth(), game.getHeight());
+		glViewport(0, 0, gameG.getWidth(), gameG.getHeight());
 
-		game.init();
+		gameG.init();
+		System.out.println("Hallo?");
 	}
 
 	public void run(){
@@ -67,12 +67,15 @@ public class Driver implements Runnable {
 		int updates = 0;
 		int frames = 0;
 
+		System.out.println("Ich starte!");
 		while(running){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 
+			System.out.println("Before Update " + delta);
 			if(delta >= 1.0){
+				System.out.println("UPDATE!");
 				update();
 				updates++;
 				delta--;
@@ -81,7 +84,7 @@ public class Driver implements Runnable {
 			frames++;
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				//System.out.println(updates + " UPS, " + frames + " FPS");
+				System.out.println(updates + " UPS, " + frames + " FPS");
 			}
 			if(glfwWindowShouldClose(windows)){
 				running = false;
@@ -92,13 +95,13 @@ public class Driver implements Runnable {
 	private void update(){
 		glfwPollEvents();
 
-		game.update();
+		gameG.update();
 	}
 
 	private void render(){
 		glfwSwapBuffers(windows);
 
-		game.draw();
+		gameG.draw();
 	}
 
 	public static void main(String[] args) {
