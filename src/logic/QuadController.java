@@ -1,6 +1,8 @@
 package logic;
 
 import java.util.ArrayList;
+
+import logic.graph.Node;
 import logic.graph.Point;
 
 public class QuadController {
@@ -125,6 +127,13 @@ public class QuadController {
 		return hasObstacle;
 	}
 	
+	private ArrayList<Node> getGraphNodesWithObstacles() {
+		ArrayList<Node> nodes = new ArrayList<>();
+		for (Quad obstacle : getObstacles()) {
+			
+		}
+	}
+	
 	
 	/* *** GETTERS *** */
 	public Index2D indexForPoint(Point point) {
@@ -133,6 +142,17 @@ public class QuadController {
 	
 	public Quad quadAtIndex(Index2D index) {
 		return quads.get((width * index.getY()) + index.getX());
+	}
+	
+	public ArrayList<Quad> getObstacles() {
+		ArrayList<Quad> obstacles = new ArrayList<>();
+		quads.stream().forEach((quad) -> {
+			if (quad.isObstacle()) {
+				obstacles.add(quad);
+			}
+		});
+		
+		return obstacles;
 	}
 
 	public ArrayList<Quad> getQuads() {
