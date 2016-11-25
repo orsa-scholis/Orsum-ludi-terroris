@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import logic.graph.Node;
 import logic.graph.Point;
 
+final class Constants {
+	public static float OBSTACLE_CORNER_NODE_PADDING = 0.2f;
+}
+
 public class QuadController {
 	private ArrayList<Quad> quads = new ArrayList<>();
 	private int width;
@@ -129,9 +133,13 @@ public class QuadController {
 	
 	private ArrayList<Node> getGraphNodesWithObstacles() {
 		ArrayList<Node> nodes = new ArrayList<>();
+		float relativePadding = (1.0f / width) * Constants.OBSTACLE_CORNER_NODE_PADDING;
 		for (Quad obstacle : getObstacles()) {
+			Index2D index = obstacle.getIndex();
 			
 		}
+		
+		return nodes;
 	}
 	
 	
