@@ -2,8 +2,6 @@ package logic.graph;
 
 import java.util.ArrayList;
 
-import logic.Index2D;
-
 public class Node {
 	private ArrayList<Connection> connections = new ArrayList<>();
 	private Point point;
@@ -34,5 +32,10 @@ public class Node {
 	
 	public void setPoint(Point point) {
 		this.point = point;
+	}
+
+	@Override
+	public String toString() {
+		return "Node [point=" + point + "]";
 	}
 }

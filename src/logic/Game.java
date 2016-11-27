@@ -1,7 +1,13 @@
 package logic;
 
+import java.util.ArrayList;
+
+import logic.algorithm.PathFinder;
+import logic.graph.Node;
+
 public class Game {
 	private QuadController quadController;
+	private PathFinder pathFinder;
 
 	/**
 	 * Game constructor
@@ -19,10 +25,21 @@ public class Game {
 			int isObstacle = field[quad.getIndex().getY()][quad.getIndex().getX()];
 			quad.setObstacle(isObstacle == 1);
 		}
+		
+		setup();
+	}
+	
+	protected void setup() {
+		pathFinder = new PathFinder(quadController.getGraphNodesWithObstacles());
+		
+		System.out.println(pathFinder.getGraph().toString(quadController.getDWidth()));
+	}
+	
+	public void getPathForMonster() {
+		
 	}
 
 	public QuadController getQuadController() {
 		return quadController;
 	}
-	
 }

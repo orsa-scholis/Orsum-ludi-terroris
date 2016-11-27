@@ -131,12 +131,48 @@ public class QuadController {
 		return hasObstacle;
 	}
 	
-	private ArrayList<Node> getGraphNodesWithObstacles() {
+	public ArrayList<Node> getGraphNodesWithObstacles() {
 		ArrayList<Node> nodes = new ArrayList<>();
 		float relativePadding = (1.0f / width) * Constants.OBSTACLE_CORNER_NODE_PADDING;
 		for (Quad obstacle : getObstacles()) {
-			Index2D index = obstacle.getIndex();
+			Index2D quadIndex = obstacle.getIndex();
 			
+			Index2D[] indices = new Index2D[] {
+					new Index2D(quadIndex.getX() - 1, quadIndex.getY() + 1), // Top left
+					new Index2D(quadIndex.getX() + 1, quadIndex.getY() + 1), // Top right
+					new Index2D(quadIndex.getX() - 1, quadIndex.getY() - 1), // Bottom left
+					new Index2D(quadIndex.getX() + 1, quadIndex.getY() - 1)  // Bottom right
+			};
+			
+			// Bottom left origin point
+			Point relativeCoords = quadIndex.toPoint(getDWidth());
+			double relativeQuadSize = 1.0 / getDWidth();
+			Point[] points = new Point[] {
+					new Point(relativeCoords.getX() - relativePadding, relativeCoords.getY() + relativeQuadSize + relativePadding), // Top Left
+					new Point(relativeCoords.getX() + relativeQuadSize + relativePadding, relativeCoords.getY() + relativeQuadSize + relativePadding), // Top right
+					new Point(relativeCoords.getX() - relativePadding, relativeCoords.getY() - relativePadding), // Bottom left
+					new Point(relativeCoords.getX() + relativeQuadSize + relativePadding, relativeCoords.getY() - relativePadding) // Bottom right
+			};
+			
+			for (int i = 0; i < indices.length; i++) {
+				Index2D index = indices[i];
+				Point point = points[i];
+				
+				// Out of boundaries of the field 
+				if (index.getX() < 0 || index.getY() < 0 ||
+					index.getX() == width || index.getY() == height) {
+					
+					break;
+				}
+				
+				Quad edgeQuad = quadAtIndex(index);
+				if (edgeQuad.isObstacle()) {
+					continue;
+				}
+				
+				Node node = new Node(point);
+				nodes.add(node);
+			}
 		}
 		
 		return nodes;
@@ -152,7 +188,7 @@ public class QuadController {
 		return quads.get((width * index.getY()) + index.getX());
 	}
 	
-	public ArrayList<Quad> getObstacles() {
+	private ArrayList<Quad> getObstacles() {
 		ArrayList<Quad> obstacles = new ArrayList<>();
 		quads.stream().forEach((quad) -> {
 			if (quad.isObstacle()) {
@@ -170,9 +206,17 @@ public class QuadController {
 	public int getWidth() {
 		return width;
 	}
+	
+	public double getDWidth() {
+		return (double)width;
+	}
 
 	public int getHeight() {
 		return height;
+	}
+	
+	public double getDHeight() {
+		return (double)height;
 	}
 	
 	@Override
