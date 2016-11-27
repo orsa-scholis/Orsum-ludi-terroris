@@ -46,7 +46,7 @@ public class Graph {
 			double x = node.getPoint().getX() * fieldSize;
 			double y = node.getPoint().getY() * fieldSize;
 			
-			returnString += "\n" + x + "\t" + y + "";
+			returnString += "\n" + x + "\t" + y;
 		}
 		
 		returnString += "\n}";

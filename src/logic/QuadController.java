@@ -160,13 +160,26 @@ public class QuadController {
 				
 				// Out of boundaries of the field 
 				if (index.getX() < 0 || index.getY() < 0 ||
-					index.getX() == width || index.getY() == height) {
+					index.getX() >= width || index.getY() >= height) {
 					
 					break;
 				}
 				
+				// Get quads, which are vertical or horizontal neighbors to the current obstacle
+				Quad neighborQuad1 = quadAtIndex(new Index2D(quadIndex.getX(), index.getY()));
+				Quad neighborQuad2 = quadAtIndex(new Index2D(index.getX(), quadIndex.getY()));
+				
+				// Out of field bounds. Simulate obstacles
+				if (neighborQuad1 == null) {
+					neighborQuad1 = new Quad(null, true);
+				}
+				
+				if (neighborQuad2 == null) {
+					neighborQuad2 = new Quad(null, true);
+				}
+				
 				Quad edgeQuad = quadAtIndex(index);
-				if (edgeQuad.isObstacle()) {
+				if (edgeQuad.isObstacle() || neighborQuad1.isObstacle() || neighborQuad2.isObstacle()) {
 					continue;
 				}
 				
@@ -185,6 +198,10 @@ public class QuadController {
 	}
 	
 	public Quad quadAtIndex(Index2D index) {
+		if (index.getX() < 0 || index.getY() < 0 || index.getX() >= width || index.getY() >= height) {
+			return null;
+		}
+		
 		return quads.get((width * index.getY()) + index.getX());
 	}
 	

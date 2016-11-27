@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import logic.Game;
+import logic.algorithm.PathFinder;
 import logic.graph.*;
 
 public class TestQuadController {
@@ -45,6 +46,37 @@ public class TestQuadController {
 
 	@After
 	public void tearDown() throws Exception {
+	
+	}
+	
+	@Test
+	public void testNodesGeneration() {
+		int[][] field = new int[][] {
+			// Bottom
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 1, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 1, 1, 0, 0, 1, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 0, 0, 0, 0, 0, 0, 0, 0 }
+			// Top
+		};
+		
+		Game game = new Game(field);
+		
+		PathFinder pFinder = new PathFinder(game.getQuadController().getGraphNodesWithObstacles());
+		String desc = pFinder.getGraph().toString(game.getQuadController().getDWidth());
+		
+		String expected = "nodes: {\n1.7999999970197678	0.7999999970197678\n3.2000000029802322	0.7999999970197678\n"
+						+"1.7999999970197678	3.2000000029802322\n4.200000002980232	3.2000000029802322\n"
+						+"4.200000002980232	1.7999999970197678\n0.7999999970197678	6.200000002980232\n0.7999999970197678	4.799999997019768\n"
+						+"3.2000000029802322	6.200000002980232\n3.2000000029802322	4.799999997019768\n"
+						+"4.799999997019768	6.200000002980232\n6.200000002980232	6.200000002980232\n"
+						+"4.799999997019768	4.799999997019768\n6.200000002980232	4.799999997019768\n}";
+		
+		assertNotEquals(expected, desc);
 	}
 
 	@Test
