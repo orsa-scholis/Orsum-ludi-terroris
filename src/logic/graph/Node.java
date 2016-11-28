@@ -18,6 +18,12 @@ public class Node {
 		this.point = point;
 	}
 	
+	public void connectTo(Node nodeToConnect) {
+		Connection connection = new Connection(this, nodeToConnect);
+		this.connections.add(connection);
+		nodeToConnect.getConnections().add(connection);
+	}
+	
 	public ArrayList<Connection> getConnections() {
 		return connections;
 	}

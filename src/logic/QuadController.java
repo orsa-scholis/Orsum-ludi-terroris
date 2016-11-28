@@ -205,7 +205,7 @@ public class QuadController {
 		return quads.get((width * index.getY()) + index.getX());
 	}
 	
-	private ArrayList<Quad> getObstacles() {
+	public ArrayList<Quad> getObstacles() {
 		ArrayList<Quad> obstacles = new ArrayList<>();
 		quads.stream().forEach((quad) -> {
 			if (quad.isObstacle()) {
