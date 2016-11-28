@@ -60,5 +60,9 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="lwjgl-3" level="project" />
+    <orderEntry type="library" name="lwjgl" level="project" />
+    <orderEntry type="library" name="natives" level="project" />
+    <orderEntry type="library" name="lwjgl-glfw" level="project" />
+    <orderEntry type="library" name="lwjgl-opengl" level="project" />
   </component>
 </module>

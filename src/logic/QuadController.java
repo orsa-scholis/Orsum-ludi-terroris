@@ -1,7 +1,13 @@
 package logic;
 
 import java.util.ArrayList;
+
+import logic.graph.Node;
 import logic.graph.Point;
+
+final class Constants {
+	public static float OBSTACLE_CORNER_NODE_PADDING = 0.2f;
+}
 
 public class QuadController {
 	private ArrayList<Quad> quads = new ArrayList<>();
@@ -112,9 +118,8 @@ public class QuadController {
 					Quad quad = quadAtIndex(new Index2D(x, j));
 					if (quad.isObstacle()) {
 						hasObstacle = true;
+						break;
 					}
-					
-					break;
 				}
 				
 				// exit outer loop
@@ -126,6 +131,66 @@ public class QuadController {
 		return hasObstacle;
 	}
 	
+	public ArrayList<Node> getGraphNodesWithObstacles() {
+		ArrayList<Node> nodes = new ArrayList<>();
+		float relativePadding = (1.0f / width) * Constants.OBSTACLE_CORNER_NODE_PADDING;
+		for (Quad obstacle : getObstacles()) {
+			Index2D quadIndex = obstacle.getIndex();
+			
+			Index2D[] indices = new Index2D[] {
+					new Index2D(quadIndex.getX() - 1, quadIndex.getY() + 1), // Top left
+					new Index2D(quadIndex.getX() + 1, quadIndex.getY() + 1), // Top right
+					new Index2D(quadIndex.getX() - 1, quadIndex.getY() - 1), // Bottom left
+					new Index2D(quadIndex.getX() + 1, quadIndex.getY() - 1)  // Bottom right
+			};
+			
+			// Bottom left origin point
+			Point relativeCoords = quadIndex.toPoint(getDWidth());
+			double relativeQuadSize = 1.0 / getDWidth();
+			Point[] points = new Point[] {
+					new Point(relativeCoords.getX() - relativePadding, relativeCoords.getY() + relativeQuadSize + relativePadding), // Top Left
+					new Point(relativeCoords.getX() + relativeQuadSize + relativePadding, relativeCoords.getY() + relativeQuadSize + relativePadding), // Top right
+					new Point(relativeCoords.getX() - relativePadding, relativeCoords.getY() - relativePadding), // Bottom left
+					new Point(relativeCoords.getX() + relativeQuadSize + relativePadding, relativeCoords.getY() - relativePadding) // Bottom right
+			};
+			
+			for (int i = 0; i < indices.length; i++) {
+				Index2D index = indices[i];
+				Point point = points[i];
+				
+				// Out of boundaries of the field 
+				if (index.getX() < 0 || index.getY() < 0 ||
+					index.getX() >= width || index.getY() >= height) {
+					
+					break;
+				}
+				
+				// Get quads, which are vertical or horizontal neighbors to the current obstacle
+				Quad neighborQuad1 = quadAtIndex(new Index2D(quadIndex.getX(), index.getY()));
+				Quad neighborQuad2 = quadAtIndex(new Index2D(index.getX(), quadIndex.getY()));
+				
+				// Out of field bounds. Simulate obstacles
+				if (neighborQuad1 == null) {
+					neighborQuad1 = new Quad(null, true);
+				}
+				
+				if (neighborQuad2 == null) {
+					neighborQuad2 = new Quad(null, true);
+				}
+				
+				Quad edgeQuad = quadAtIndex(index);
+				if (edgeQuad.isObstacle() || neighborQuad1.isObstacle() || neighborQuad2.isObstacle()) {
+					continue;
+				}
+				
+				Node node = new Node(point);
+				nodes.add(node);
+			}
+		}
+		
+		return nodes;
+	}
+	
 	
 	/* *** GETTERS *** */
 	public Index2D indexForPoint(Point point) {
@@ -133,7 +198,22 @@ public class QuadController {
 	}
 	
 	public Quad quadAtIndex(Index2D index) {
+		if (index.getX() < 0 || index.getY() < 0 || index.getX() >= width || index.getY() >= height) {
+			return null;
+		}
+		
 		return quads.get((width * index.getY()) + index.getX());
+	}
+	
+	public ArrayList<Quad> getObstacles() {
+		ArrayList<Quad> obstacles = new ArrayList<>();
+		quads.stream().forEach((quad) -> {
+			if (quad.isObstacle()) {
+				obstacles.add(quad);
+			}
+		});
+		
+		return obstacles;
 	}
 
 	public ArrayList<Quad> getQuads() {
@@ -143,9 +223,17 @@ public class QuadController {
 	public int getWidth() {
 		return width;
 	}
+	
+	public double getDWidth() {
+		return (double)width;
+	}
 
 	public int getHeight() {
 		return height;
+	}
+	
+	public double getDHeight() {
+		return (double)height;
 	}
 	
 	@Override

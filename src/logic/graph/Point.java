@@ -36,4 +36,10 @@ public class Point {
 	public Index2D toIndex2d(double fieldSize) {
 		return new Index2D((int)Math.floor(x * fieldSize), (int)Math.floor(y * fieldSize));
 	}
+
+
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
 }

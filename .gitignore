@@ -4,3 +4,5 @@
 .metadata*
 .idea/*
 bin/*
+.idea\*
+.idea*

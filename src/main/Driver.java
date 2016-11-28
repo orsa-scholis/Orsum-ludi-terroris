@@ -8,8 +8,8 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
-import input.KeyboardInput;
-import input.MouseInput;
+import view.input.KeyboardInput;
+import view.input.MouseInput;
 
 public class Driver implements Runnable {
 
