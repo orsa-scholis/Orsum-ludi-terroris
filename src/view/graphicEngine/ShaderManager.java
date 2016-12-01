@@ -7,9 +7,9 @@ public class ShaderManager {
 	public static Shader shaderMonster;
 
 	public static void loadAll(){
-		shaderField = new Shader("src/shaders/vertex.shader", "src/shaders/fragment.shader");
-		shaderPlayer = new Shader("src/shaders/vertexPlayer.shader", "src/shaders/fragment.shader");
-		shaderMonster = new Shader("src/shaders/vertexMonster.shader", "src/shaders/fragment.shader");
+		shaderField = new Shader("src/view/shaders/vertex.shader", "src/view/shaders/fragment.shader");
+		shaderPlayer = new Shader("src/view/shaders/vertexPlayer.shader", "src/view/shaders/fragment.shader");
+		shaderMonster = new Shader("src/view/shaders/vertexMonster.shader", "src/view/shaders/fragment.shader");
 	}
 
 

@@ -1,7 +1,17 @@
 package view.controller;
 
-/**
- * Created by Philipp on 24/11/2016.
- */
+import logic.Game;
+import main.Driver;
+
 public class User {
+	private Driver driver;
+
+	public User(Driver driver) {
+
+	}
+
+	private Game getGame(){
+		return driver.getGame();
+	}
+
 }
