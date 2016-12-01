@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import logic.Index2D;
 import logic.Quad;
 import main.Driver;
-import view.controller.Field;
-import view.graphicEngine.ShaderManager;
+import view.controller.Object;
+import logic.graph.Monster;
+import logic.graph.Player;
+import view.graphicEngine.Shader;
 
 public class Renderer {
 
@@ -22,30 +24,50 @@ public class Renderer {
 
 			Index2D indy = quady.getIndex();
 
-			float[] vertices = { indy.getX() / 4f - 1f, indy.getY() / 4f - (1f - getFieldSize()), 0f,
-					indy.getX() / 4f - 1f, indy.getY() / 4f - 1f, 0f, indy.getX() / 4f - (1f - getFieldSize()),
-					indy.getY() / 4f - 1f, 0f, indy.getX() / 4f - (1f - getFieldSize()),
-					indy.getY() / 4f - (1f - getFieldSize()), 0f, };
-
 			if (quady.isObstacle()) {
-				Field tmp = new Field(vertices);
-
-				driver.getShaderMan().shaderField.start();
-                driver.getShaderMan().shaderField.setUniform3f("pos", tmp.position);
-                tmp.draw();
-                ShaderManager.shaderField.stop();
-
+				float x = (float)indy.getX() / (float)driver.getGame().getQuadController().getWidth();
+				float y = (float)indy.getY() / (float)driver.getGame().getQuadController().getHeight();
+				drawWithShader(driver.getShaderMan().shaderObstacle, calcVertices(getFieldSize(), x, y));
 			} else {
-				(new Field(vertices)).draw();
+				float x = (float)indy.getX() / (float)driver.getGame().getQuadController().getWidth();
+				float y = (float)indy.getY() / (float)driver.getGame().getQuadController().getHeight();
+				(new Object(calcVertices(getFieldSize(), x, y))).draw();
 			}
 		}
 
+		Player player = driver.getGame().getPlayer();
+		float playerSize = 0.05f;
+		drawWithShader(driver.getShaderMan().shaderPlayer, calcVertices(playerSize, player.getPoint().getFX(), player.getPoint().getFY()));
+
+		Monster monster = driver.getGame().getMonster();
+		float monsterSize = 0.05f;
+		drawWithShader(driver.getShaderMan().shaderMonster, calcVertices(monsterSize, monster.getPoint().getFX(), monster.getPoint().getFY()));
 
 
 	}
 
-	private int getGameSize() {
-		return driver.getGame().getQuadController().getWidth();
+	private void drawWithShader(Shader shader, float[] vertices){
+		Object object = new Object(vertices);
+
+		shader.start();
+		shader.setUniform3f("pos", object.position);
+		object.draw();
+		shader.stop();
+	}
+
+	private float[] calcVertices(float size, float x, float y){
+
+		float px = (x * 2.0f) - 1.0f;
+		float py = (y * 2.0f) - 1.0f;
+
+		float[] vertices = {
+				px, py + size, 0f,
+				px, py, 0f,
+				px + size, py, 0f,
+				px + size, py + size, 0f
+		};
+
+		return vertices;
 	}
 
 	private float getFieldSize() {
@@ -55,5 +77,4 @@ public class Renderer {
 	private ArrayList<Quad> getQuads() {
 		return driver.getGame().getQuadController().getQuads();
 	}
-
 }

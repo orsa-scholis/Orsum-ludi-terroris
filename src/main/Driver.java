@@ -5,7 +5,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
-import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
 import logic.Game;
@@ -56,7 +55,6 @@ public class Driver implements Runnable {
 
 		game = new Game(field);
 		move = new Movement();
-		shaderMan = new ShaderManager();
 		rend = new Renderer(this);
 		running = true;
 
@@ -84,7 +82,7 @@ public class Driver implements Runnable {
 		GL.createCapabilities();
 		glViewport(0, 0, height, width);
 
-		shaderMan.loadAll();
+		shaderMan = ShaderManager.getInstance();
 	}
 
 
@@ -140,5 +138,17 @@ public class Driver implements Runnable {
 
 	public ShaderManager getShaderMan(){
 		return shaderMan;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight(){
+		return height;
+	}
+
+	public Movement getMove() {
+		return move;
 	}
 }

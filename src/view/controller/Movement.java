@@ -1,5 +1,7 @@
 package view.controller;
 
+import logic.graph.Point;
+
 /**
  * Created by Philipp on 17/11/2016.
  */
@@ -15,10 +17,10 @@ public class Movement {
 
     }
 
-    public boolean move(Field gm, int direction){
+    public boolean move(Point pt, int direction){
         System.out.println("-------------Move----------------");
-        int posX = gm.getPositionX();
-        int posY = gm.getPositionY();
+        double posX = pt.getX();
+        double posY = pt.getY();
         switch (direction) {
             case 0:
                 if (isThereNoObstacle(posX, posY + 1)) {
@@ -51,19 +53,10 @@ public class Movement {
             default:
                 return false;
         }
-        gm.updatePosition(posX, posY);
         return true;
     }
 
-    public boolean isThereNoObstacle(int x, int y){
-        /*if(x < 0 || y < 0 || x > gamegraphic.getGameSize() -1 || y > gamegraphic.getGameSize() -1 ){
-            return false;
-        }
-        if(gamegraphic.getField()[y][x] == 1){
-            System.out.println(gamegraphic.getField()[x][y] + " " + x + " " + y);
-            return false;
-        }
-        System.out.println(gamegraphic.getField()[x][y] + " " + x + " " + y);*/
+    public boolean isThereNoObstacle(double posX, double d){
         return true;
     }
 
