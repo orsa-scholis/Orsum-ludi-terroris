@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 public class Graph {
 	private Node root;
+	private Node end;
 	private ArrayList<Node> nodes;
 	
 	public Graph() {
@@ -20,6 +21,10 @@ public class Graph {
 	
 	public void addNode(Node node) {
 		this.nodes.add(node);
+	}
+	
+	public void removeNode(Node node) {
+		this.nodes.remove(node);
 	}
 
 	public Node getRoot() {
@@ -38,6 +43,14 @@ public class Graph {
 		this.nodes = nodes;
 	}
 	
+	public Node getEnd() {
+		return end;
+	}
+
+	public void setEnd(Node end) {
+		this.end = end;
+	}
+
 	public String toString(double fieldSize) {
 		String returnString = "nodes: {";
 		for (Iterator<Node> iterator = nodes.iterator(); iterator.hasNext();) {
@@ -57,7 +70,11 @@ public class Graph {
 		String returnString = "{nodes:[";
 		
 		ArrayList<Connection> connections = new ArrayList<>();
-		for (Node node : nodes) {
+		ArrayList<Node> allNodes = new ArrayList<>();
+		allNodes.addAll(nodes);
+		allNodes.add(root);
+		allNodes.add(end);
+		for (Node node : allNodes) {
 			returnString += "[" + node.getPoint().getX() + "," + node.getPoint().getY() + "],";
 			
 			for (Connection connection : node.getConnections()) {

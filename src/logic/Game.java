@@ -6,13 +6,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import logic.algorithm.Path;
 import logic.algorithm.PathFinder;
 import logic.graph.Connection;
+import logic.graph.Monster;
 import logic.graph.Node;
+import logic.graph.Player;
+import logic.graph.Point;
 
 public class Game {
 	private QuadController quadController;
 	private PathFinder pathFinder;
+	private Player player;
+	private Monster monster;
 
 	/**
 	 * Game constructor
@@ -25,6 +31,8 @@ public class Game {
 		int width = field[0].length;
 		int height = field.length;
 		this.quadController = new QuadController(width, height);
+		this.player = new Player(new Point(0.01, 0.01));
+		this.monster = new Monster(new Point(0.99, 0.99));
 		
 		for (Quad quad : quadController.getQuads()) {
 			int isObstacle = field[quad.getIndex().getY()][quad.getIndex().getX()];
@@ -40,8 +48,8 @@ public class Game {
 		System.out.println(pathFinder.getGraph().toString(quadController.getDWidth()));
 	}
 	
-	public void getPathForMonster() {
-		
+	public Path getPathForMonster() {
+		return pathFinder.getBestPathToShootForMonster(monster, player, quadController);
 	}
 	
 	public void export(String path) {
@@ -94,8 +102,24 @@ public class Game {
 		returnString += "}";
 		return returnString;
 	}
+	
+	public void setMonsterPosition(Point newPoint) {
+		monster.setPoint(newPoint);
+	}
+	
+	public void setPlayerPosition(Point newPoint) {
+		player.setPoint(newPoint);
+	}
 
 	public QuadController getQuadController() {
 		return quadController;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public Monster getMonster() {
+		return monster;
 	}
 }

@@ -21,6 +21,7 @@ public class Main {
 		Game game = new Game(field);
 		System.out.println(game.getQuadController().toStringWithIndices());
 		
+		game.getPathForMonster();
 		game.export("debug/export.txt");
 	}
 }
