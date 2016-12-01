@@ -1,14 +1,14 @@
 package main;
 import java.util.ArrayList;
 
-import gameEnginge.*;
-import graphicEngine.ShaderManager;
+import view.graphicEngine.*;
+import view.controller.*;
 
 public class GameGraphic {
 	private Driver driver;
-    private MovementController movCont;
+    private Movement movCont;
 	private int playerID;
-    private ArrayList<GameObject> objects;
+    private ArrayList<Field> objects;
     private int[][] field;
     private int gameSize;
     private float fieldSize;
@@ -24,7 +24,7 @@ public class GameGraphic {
 
 	public GameGraphic(Driver driver, int gameSize) {
 		this.driver = driver;
-        movCont = new MovementController(this);
+        movCont = new Movement();
 		objects = new ArrayList<>();
         field = new int[][] {
                 { PLAYER, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD },
@@ -56,13 +56,13 @@ public class GameGraphic {
 						0, 1, 2,
 						2, 3, 0};
 
-                GameObject tmp;
+                Field tmp;
                 switch(field[(int)y][(int)x]) {
                     case 0:
-                        tmp = new Field(vertices, indices, 1, driver);
+                        tmp = new Field(vertices, indices, 1);
                         break;
                     case 1:
-                        tmp = new Field(vertices, indices, 0, driver);
+                        tmp = new Field(vertices, indices, 0);
                         break;
                     case 2:
                         tmp = new Player(driver);
@@ -87,7 +87,7 @@ public class GameGraphic {
 	}
 
 	public void draw() {
-		for (GameObject gmO : objects) {
+		for (Field gmO : objects) {
 			switch (gmO.getGoType()) {
                 case 0:
                     ShaderManager.shaderField.start();
@@ -144,7 +144,7 @@ public class GameGraphic {
         return fieldSize;
     }
 
-    public MovementController getMovCont() {
+    public Movement getMovCont() {
         return movCont;
     }
 }
