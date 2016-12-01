@@ -2,10 +2,13 @@ package logic.algorithm;
 
 import java.util.ArrayList;
 
+import logic.Quad;
 import logic.QuadController;
 import logic.graph.Connection;
 import logic.graph.Graph;
+import logic.graph.Monster;
 import logic.graph.Node;
+import logic.graph.Player;
 import logic.graph.Point;
 
 public class PathFinder {
@@ -35,6 +38,29 @@ public class PathFinder {
 				}
 			}
 		}
+	}
+	
+	private void integratePlayerAndMonsterIntoGraph(Player player, Monster monster, QuadController quadController) {
+		graph.setRoot(monster);
+		graph.setEnd(player);
+		
+		Point monsterPoint = monster.getPoint();
+		Point playerPoint = player.getPoint();
+		for (Node node : graph.getNodes()) {
+			if (!quadController.testLineForObstacles(monsterPoint, node.getPoint())) {
+				monster.connectTo(node);
+			}
+			
+			if (!quadController.testLineForObstacles(playerPoint, node.getPoint())) {
+				player.connectTo(node);
+			}
+		}
+	}
+	
+	public Path getBestPathToShootForMonster(Monster monster, Player player, QuadController quadController) {
+		integratePlayerAndMonsterIntoGraph(player, monster, quadController);
+		
+		return null;
 	}
 
 	public Graph getGraph() {
