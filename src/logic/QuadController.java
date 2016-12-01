@@ -37,10 +37,7 @@ public class QuadController {
 		Index2D endIndex = indexForPoint(end);
 		boolean hasObstacle = false;
 		
-		System.out.println(startIndex);
-		System.out.println(endIndex);
 		if (startIndex.getY() == endIndex.getY()) {
-			System.out.println("gleiche Zeile");
 			// gleiche Zeile
 			
 			int yIndex = (startIndex.getY() * width); // Der Index des ersten Quads der Zeile
@@ -51,7 +48,6 @@ public class QuadController {
 				}
 			}
 		} else if (startIndex.getX() == endIndex.getX()) {
-			System.out.println("gleiche Spalte");
 			// gleiche Spalte
 			
 			for (int i = startIndex.getY(); i <= endIndex.getY(); i++) {
@@ -61,7 +57,6 @@ public class QuadController {
 				}
 			}
 		} else {
-			System.out.println("Querlinie");
 			// Querlinie
 			
 			// Immer bei dem tieferen X-Wert anfangen
@@ -73,13 +68,10 @@ public class QuadController {
 					new Point(start.getX() * width, start.getY() * height), 
 					new Point(end.getX() * width, end.getY() * height)
 			);
-			System.out.println(function);
+
 			for (int x = startIndex.getX(); x <= endIndex.getX(); x++) {
 				int entryY = (int)Math.floor(function.getY((float)x));
 				int exitY = (int)Math.floor(function.getY((float)(x + 1)));
-				
-				System.out.println("entry: " + entryY);
-				System.out.println("exit: " + exitY);
 				
 				int add;
 				if (function.getM() > 0) {

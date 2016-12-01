@@ -2,7 +2,7 @@ package logic.algorithm;
 
 import java.util.ArrayList;
 
-import logic.Quad;
+import logic.LinearFunction;
 import logic.QuadController;
 import logic.graph.Connection;
 import logic.graph.Graph;
@@ -57,8 +57,20 @@ public class PathFinder {
 		}
 	}
 	
+	private void findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(Player player) {
+		ArrayList<Connection> playerConnections = player.getConnections();
+		
+		Point playerPosition = player.getPoint();
+		for (Connection connection : playerConnections) {
+			Point connectionNodePosition = connection.getEnd().getPoint();
+			
+			LinearFunction function = new LinearFunction(playerPosition, connectionNodePosition);
+		}
+	}
+	
 	public Path getBestPathToShootForMonster(Monster monster, Player player, QuadController quadController) {
 		integratePlayerAndMonsterIntoGraph(player, monster, quadController);
+		findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player);
 		
 		return null;
 	}
