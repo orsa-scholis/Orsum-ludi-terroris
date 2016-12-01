@@ -8,6 +8,10 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import logic.Game;
+import view.Renderer;
+import view.controller.Movement;
+import view.graphicEngine.ShaderManager;
 import view.input.KeyboardInput;
 import view.input.MouseInput;
 
@@ -15,16 +19,22 @@ public class Driver implements Runnable {
 
 	private Thread thread;
 	private boolean running = false;
-
-	public long windows;
-	public boolean flag;
+	private long windows;
+	private int height = 1000;
+	private int width = 1000;
 
 	@SuppressWarnings("unused")
 	private GLFWKeyCallback keyCallback;
 	@SuppressWarnings("unused")
 	private GLFWCursorPosCallback cursorCallback;
 
-	public GameGraphic gameG;
+	private Game game;
+	private Movement move;
+	private ShaderManager shaderMan;
+	private Renderer rend;
+
+    public static int FIELD = 0;
+    public static int OBSTACLE = 1;
 
 	public void start(){
 		thread = new Thread(this, "Game");
@@ -32,15 +42,36 @@ public class Driver implements Runnable {
 	}
 
 	private void init(){
-		gameG = new GameGraphic(this, 8);
+
+		int[][] field = new int[][] {
+            { FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD },
+            { FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD },
+            { FIELD, FIELD, OBSTACLE,FIELD, FIELD, FIELD, FIELD, FIELD },
+            { FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD },
+            { FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD },
+            { FIELD, OBSTACLE,OBSTACLE,FIELD, FIELD, OBSTACLE, FIELD, FIELD },
+            { FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD },
+            { FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD }
+		};
+
+		game = new Game(field);
+		move = new Movement();
+		shaderMan = new ShaderManager();
+		rend = new Renderer(this);
 		running = true;
-		flag = false;
+
+		graficInit();
+	}
+
+
+	private void graficInit(){
+
 		if(!glfwInit()){
 			System.err.println("Initialisierung fehlgeschlagen!");
 		}
 
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		windows = glfwCreateWindow(gameG.getWidth(), gameG.getHeight(), "Monstergame", NULL, NULL);
+		windows = glfwCreateWindow(height, width, "Monstergame", NULL, NULL);
 
 		if(windows == NULL){
 			System.err.println("Fenster konnte nicht erstellt werden!");
@@ -48,15 +79,14 @@ public class Driver implements Runnable {
 
 		glfwSetKeyCallback(windows, keyCallback = new KeyboardInput());
 		glfwSetCursorPosCallback(windows, cursorCallback = new MouseInput());
-		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		glfwMakeContextCurrent(windows);
 		glfwShowWindow(windows);
 		GL.createCapabilities();
-		glViewport(0, 0, gameG.getWidth(), gameG.getHeight());
+		glViewport(0, 0, height, width);
 
-		gameG.init();
-		System.out.println("Hallo?");
+		shaderMan.loadAll();
 	}
+
 
 	public void run(){
 		init();
@@ -67,15 +97,12 @@ public class Driver implements Runnable {
 		int updates = 0;
 		int frames = 0;
 
-		System.out.println("Ich starte!");
 		while(running){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 
-			System.out.println("Before Update " + delta);
 			if(delta >= 1.0){
-				System.out.println("UPDATE!");
 				update();
 				updates++;
 				delta--;
@@ -95,16 +122,23 @@ public class Driver implements Runnable {
 	private void update(){
 		glfwPollEvents();
 
-		gameG.update();
+
 	}
 
 	private void render(){
 		glfwSwapBuffers(windows);
-
-		gameG.draw();
+		rend.render();
 	}
 
 	public static void main(String[] args) {
 		new Driver().start();
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public ShaderManager getShaderMan(){
+		return shaderMan;
 	}
 }

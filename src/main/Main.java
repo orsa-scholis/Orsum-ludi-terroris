@@ -17,10 +17,10 @@ public class Main {
 			{ 0, 0, 0, 0, 0, 0, 0, 0 }
 			// Top
 		};
-		
+
 		Game game = new Game(field);
 		System.out.println(game.getQuadController().toStringWithIndices());
-		
+
 		game.export("debug/export.txt");
 	}
 }

@@ -20,8 +20,12 @@ public class Field {
     protected int positionY;
 	private VertexArrayObject vao;
     private int goType;
+	private static byte[] indices = {
+			0, 1, 2,
+			2, 3, 0
+	};
 
-	public Field(float[] vertices, byte[] indices, int goType) {
+	public Field(float[] vertices) {
 		this.count = indices.length;
 		vao = new VertexArrayObject(vertices, indices);
 		this.vaoID = vao.getVaoID();
