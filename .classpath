@@ -3,23 +3,39 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl/lwjgl-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl/lwjgl-natives-linux.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl/lwjgl-natives-macos.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl/lwjgl-natives-windows.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl/lwjgl-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl/lwjgl.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-jawt/lwjgl-jawt-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-jawt/lwjgl-jawt-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-jawt/lwjgl-jawt.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-glfw/lwjgl-glfw-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-glfw/lwjgl-glfw-natives-linux.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-glfw/lwjgl-glfw-natives-macos.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-glfw/lwjgl-glfw-natives-windows.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-glfw/lwjgl-glfw-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-glfw/lwjgl-glfw.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-opengl/lwjgl-opengl-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-opengl/lwjgl-opengl-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/lukasbischof/Documents/Development/Java/monstergame/lwjgl-3/lwjgl-opengl/lwjgl-opengl.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="monstergame/natives"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-glfw/lwjgl-glfw.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-opengl/lwjgl-opengl.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl/lwjgl-javadoc.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl/lwjgl-natives-linux.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl/lwjgl-natives-macos.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl/lwjgl-natives-windows.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl/lwjgl-sources.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-bgfx/lwjgl-bgfx-javadoc.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-bgfx/lwjgl-bgfx-natives-linux.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-bgfx/lwjgl-bgfx-natives-macos.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-bgfx/lwjgl-bgfx-natives-windows.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-bgfx/lwjgl-bgfx-sources.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-bgfx/lwjgl-bgfx.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-egl/lwjgl-egl-javadoc.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-egl/lwjgl-egl-sources.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-egl/lwjgl-egl.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-glfw/lwjgl-glfw-javadoc.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-glfw/lwjgl-glfw-natives-linux.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-glfw/lwjgl-glfw-natives-macos.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-glfw/lwjgl-glfw-natives-windows.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-glfw/lwjgl-glfw-sources.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-jawt/lwjgl-jawt-javadoc.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-jawt/lwjgl-jawt-sources.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-jawt/lwjgl-jawt.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-opengl/lwjgl-opengl-javadoc.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-opengl/lwjgl-opengl-sources.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-opengles/lwjgl-opengles-javadoc.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-opengles/lwjgl-opengles-sources.jar"/>
+	<classpathentry kind="lib" path="lwjgl-3/lwjgl-opengles/lwjgl-opengles.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

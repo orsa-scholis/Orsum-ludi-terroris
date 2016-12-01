@@ -66,7 +66,7 @@ public class TestQuadController {
 		
 		Game game = new Game(field);
 		
-		PathFinder pFinder = new PathFinder(game.getQuadController().getGraphNodesWithObstacles());
+		PathFinder pFinder = new PathFinder(game.getQuadController().getGraphNodesWithObstacles(), game.getQuadController());
 		String desc = pFinder.getGraph().toString(game.getQuadController().getDWidth());
 		
 		String expected = "nodes: {\n1.7999999970197678	0.7999999970197678\n3.2000000029802322	0.7999999970197678\n"
