@@ -25,13 +25,13 @@ public class User {
 
 	public void update(){
 		if(points == null){
-			if(getGame().getPathForMonster().getPoints().size() > 0){
-				points = getGame().getPathForMonster().getPoints();
-			}
+//			if(getGame().getPathForMonster().getPoints().size() > 0){
+//				points = getGame().getPathForMonster().getPoints();
+//			}
 		}
-		else if(!points.equals(getGame().getPathForMonster().getPoints())){
-			points = getGame().getPathForMonster().getPoints();
-		}
+//		else if(!points.equals(getGame().getPathForMonster().getPoints())){
+//			points = getGame().getPathForMonster().getPoints();
+//		}
 		else{
 			getMove().moveTo(getGame().getMonster(), points.get(pointsCount));
 		}
