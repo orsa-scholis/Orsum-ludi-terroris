@@ -22,36 +22,36 @@ public class Game {
 
 	/**
 	 * Game constructor
-	 * @param field	Represents the field. A 0 represents an empty space, while 1 represents an obstacle. 
+	 * @param field	Represents the field. A 0 represents an empty space, while 1 represents an obstacle.
 	 * The origin ((0, 0)-Index) is in the bottom left corner
 	 */
 	public Game(int[][] field) {
 		super();
-		
+
 		int width = field[0].length;
 		int height = field.length;
 		this.quadController = new QuadController(width, height);
 		this.player = new Player(new Point(0.01, 0.01));
 		this.monster = new Monster(new Point(0.99, 0.99));
-		
+
 		for (Quad quad : quadController.getQuads()) {
 			int isObstacle = field[quad.getIndex().getY()][quad.getIndex().getX()];
 			quad.setObstacle(isObstacle == 1);
 		}
-		
+
 		setup();
 	}
-	
+
 	protected void setup() {
 		pathFinder = new PathFinder(quadController.getGraphNodesWithObstacles(), quadController);
-		
+
 		System.out.println(pathFinder.getGraph().toString(quadController.getDWidth()));
 	}
-	
+
 	public Path getPathForMonster() {
 		return pathFinder.getBestPathToShootForMonster(monster, player, quadController);
 	}
-	
+
 	public void export(String path) {
 		BufferedWriter writer = null;
 		try {
@@ -70,14 +70,14 @@ public class Game {
 			}
 		}
 	}
-	
+
 	private String getExportStr() {
 		String returnString = "{\"size\":"+quadController.getWidth()+",\"nodes\":[";
-		
+
 		ArrayList<Connection> connections = new ArrayList<>();
 		for (Node node : pathFinder.getGraph().getNodes()) {
 			returnString += "[" + node.getPoint().getX() + "," + node.getPoint().getY() + "],";
-			
+
 			for (Connection connection : node.getConnections()) {
 				if (!connections.contains(connection)) {
 					connections.add(connection);
@@ -86,27 +86,27 @@ public class Game {
 		}
 		returnString = returnString.substring(0, returnString.length() - 1); // remove last comma
 		returnString += "],\"lines\":[";
-		
+
 		for (Connection connection : connections) {
-			returnString += "[[" + connection.getStart().getPoint().getX() + "," + connection.getStart().getPoint().getY() 
+			returnString += "[[" + connection.getStart().getPoint().getX() + "," + connection.getStart().getPoint().getY()
 						 + "],[" + connection.getEnd().getPoint().getX() + "," + connection.getEnd().getPoint().getY() + "]],";
 		}
 		returnString = returnString.substring(0, returnString.length() - 1) + "],"; // remove last comma
-		
+
 		returnString += "\"obstacles\":[";
 		for (Quad obstacle : quadController.getObstacles()) {
 			returnString += "[" + obstacle.getIndex().getX() + "," + obstacle.getIndex().getY() + "],";
 		}
 		returnString = returnString.substring(0, returnString.length() - 1) + "]"; // remove last comma
-		
+
 		returnString += "}";
 		return returnString;
 	}
-	
+
 	public void setMonsterPosition(Point newPoint) {
 		monster.setPoint(newPoint);
 	}
-	
+
 	public void setPlayerPosition(Point newPoint) {
 		player.setPoint(newPoint);
 	}
