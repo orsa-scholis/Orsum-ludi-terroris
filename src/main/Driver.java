@@ -5,12 +5,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
-import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
 import logic.Game;
 import view.Renderer;
 import view.controller.Movement;
+import view.controller.User;
 import view.graphicEngine.ShaderManager;
 import view.input.KeyboardInput;
 import view.input.MouseInput;
@@ -32,6 +32,7 @@ public class Driver implements Runnable {
 	private Movement move;
 	private ShaderManager shaderMan;
 	private Renderer rend;
+	private User user;
 
     public static int FIELD = 0;
     public static int OBSTACLE = 1;
@@ -55,9 +56,9 @@ public class Driver implements Runnable {
 		};
 
 		game = new Game(field);
-		move = new Movement();
-		shaderMan = new ShaderManager();
+		move = new Movement(this);
 		rend = new Renderer(this);
+		user = new User(this);
 		running = true;
 
 		graficInit();
@@ -84,7 +85,7 @@ public class Driver implements Runnable {
 		GL.createCapabilities();
 		glViewport(0, 0, height, width);
 
-		shaderMan.loadAll();
+		shaderMan = ShaderManager.getInstance();
 	}
 
 
@@ -121,8 +122,7 @@ public class Driver implements Runnable {
 
 	private void update(){
 		glfwPollEvents();
-
-
+		user.update();
 	}
 
 	private void render(){
@@ -140,5 +140,17 @@ public class Driver implements Runnable {
 
 	public ShaderManager getShaderMan(){
 		return shaderMan;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight(){
+		return height;
+	}
+
+	public Movement getMove() {
+		return move;
 	}
 }
