@@ -31,13 +31,15 @@ public class Dijkstra {
 
 	public Path getShortestWaysMap() {
 		DijkstraNode activeNode = findNodeWithShortestLength();
-		
-		while (activeNode.getMe() != end) {
+		while(activeNode.getMe() != end){
+			System.out.println("buf");
+			activeNode = findNodeWithShortestLength();
 			activeNode.setChecked();
 			for(Connection conn : activeNode.getMe().getConnections()){
-				if(getDnodeFromNode(conn.getEnd()).getLength() > activeNode.getLength() + conn.getLength()){
-					getDnodeFromNode(conn.getEnd()).setLength(activeNode.getLength() + conn.getLength());
-					getDnodeFromNode(conn.getEnd()).setPrevious(activeNode.getPrevious());
+				System.out.println(conn.getEnd().getPoint().getX()+":"+conn.getEnd().getPoint().getY()+" -- "+conn.getStart().getPoint().getX()+":"+conn.getStart().getPoint().getY());
+				if(getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).getLength() > activeNode.getLength() + conn.getLength()){
+					getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).setLength(activeNode.getLength() + conn.getLength());
+					getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).setPrevious(activeNode.getMe());
 				}
 			}
 		}
@@ -64,6 +66,13 @@ public class Dijkstra {
 			}
 		}
 		return null;
+	}
+
+	private Node getTargetNode(Connection conn, Node node){
+		if(conn.getEnd() == node){
+			return conn.getStart();
+		}
+		return conn.getEnd();
 	}
 
 	private Path getPathAsArrayList(){
