@@ -90,7 +90,8 @@ public class PathFinder {
 		integratePlayerAndMonsterIntoGraph(player, monster, quadController);
 		findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player, monster, quadController);
 		
-		return null;
+		Dijkstra dijkstra = new Dijkstra(graph);
+		return dijkstra.getShortestWaysMap();
 	}
 
 	public Graph getGraph() {
