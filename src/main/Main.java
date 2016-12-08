@@ -20,7 +20,7 @@ public class Main {
 		};
 
 		Game game = new Game(field);
-		game.setMonsterPosition(new Point(0.85, 0.85));
+		game.setMonsterPosition(new Point(0.9, 0.82));
 		System.out.println(game.getQuadController().toStringWithIndices());
 		Path path = game.getPathForMonster();
 		System.out.println("Path: ");
