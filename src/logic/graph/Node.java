@@ -19,6 +19,11 @@ public class Node {
 	}
 	
 	public void connectTo(Node nodeToConnect) {
+		if (nodeToConnect.equals(this)) {
+			System.out.println("(Node) Cannot connecto to itself");
+			return;
+		}
+		
 		Connection connection = new Connection(this, nodeToConnect);
 		this.connections.add(connection);
 		nodeToConnect.getConnections().add(connection);
