@@ -19,6 +19,8 @@ public class Dijkstra {
 		this.end = graph.getEnd();
 
 		allNodes = (ArrayList<Node>) graph.getNodes().clone();
+		allNodes.add(start);
+		allNodes.add(end);
 		allNodesAsDN = new ArrayList<>();
 		for(Node node : allNodes){
 			DijkstraNode dnode = new DijkstraNode(node);
@@ -32,7 +34,7 @@ public class Dijkstra {
 	public Path getShortestWaysMap() {
 		DijkstraNode activeNode = findNodeWithShortestLength();
 		while(activeNode.getMe() != end){
-			System.out.println("buf");
+			System.out.println("buf" + allNodesAsDN.indexOf(activeNode) + activeNode.isChecked());
 			activeNode = findNodeWithShortestLength();
 			activeNode.setChecked();
 			for(Connection conn : activeNode.getMe().getConnections()){
@@ -48,7 +50,7 @@ public class Dijkstra {
 	}
 
 	private DijkstraNode findNodeWithShortestLength() {
-		DijkstraNode shortest = allNodesAsDN.get(0);
+		DijkstraNode shortest = new DijkstraNode(new Node(null));;
 		for(DijkstraNode dnode : allNodesAsDN){
 			if(!dnode.isChecked()){
 				if(dnode.getLength() < shortest.getLength()){
@@ -86,7 +88,7 @@ public class Dijkstra {
 
 		ArrayList<Node> tmp = out;
 		for(int i = 0; i < out.size(); i++ ){
-			out.set(i, tmp.get(out.size()-i));
+			out.set(i, tmp.get(out.size()-i-1));
 		}
 
 		return new Path(out);
