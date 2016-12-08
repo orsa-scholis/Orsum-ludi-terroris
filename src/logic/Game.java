@@ -102,6 +102,9 @@ public class Game {
 			returnString += "[" + obstacle.getIndex().getX() + "," + obstacle.getIndex().getY() + "],";
 		}
 		returnString = returnString.substring(0, returnString.length() - 1) + "]"; // remove last comma
+		
+		returnString += ",\"player\":[" + player.getPoint().getX() + "," + player.getPoint().getY() + "]";
+		returnString += ",\"monster\":[" + monster.getPoint().getX() + "," + monster.getPoint().getY() + "]";
 
 		returnString += "}";
 		return returnString;

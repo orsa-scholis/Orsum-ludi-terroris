@@ -90,6 +90,18 @@ public class PathFinder {
 				
 				if (!quadController.testLineForObstacles(interception, monster.getPoint())) {
 					node.connectTo(monster);
+					// Hier müsste man eigentlich auch die anderen Nodes mit der neuen Verbinden,
+					// doch für Performance überspringen wir dies
+				} else {
+					for (Node graphNode : graph.getNodes()) {
+						if (graphNode.equals(node)) {
+							continue;
+						}
+						
+						if (!quadController.testLineForObstacles(graphNode.getPoint(), node.getPoint())) {
+							node.connectTo(graphNode);
+						}
+					}
 				}
 			}
 		}
@@ -106,9 +118,9 @@ public class PathFinder {
 			return null;
 		}
 		
-		//return null;
-		Dijkstra dijkstra = new Dijkstra(graph);
-		return dijkstra.getShortestWaysMap();
+		return null;
+		/*Dijkstra dijkstra = new Dijkstra(graph);
+		return dijkstra.getShortestWaysMap();*/
 	}
 
 	public Graph getGraph() {
