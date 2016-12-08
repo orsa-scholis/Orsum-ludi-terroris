@@ -19,6 +19,7 @@ public class Main {
 		};
 		
 		Game game = new Game(field);
+		game.setMonsterPosition(new Point(0.85, 0.85));
 		System.out.println(game.getQuadController().toStringWithIndices());
 		game.getPathForMonster();
 		game.export("debug/export.txt");
