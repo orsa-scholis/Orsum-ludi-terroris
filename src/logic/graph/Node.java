@@ -20,7 +20,7 @@ public class Node {
 	
 	public void connectTo(Node nodeToConnect) {
 		if (nodeToConnect.equals(this)) {
-			System.out.println("(Node) Cannot connecto to itself");
+			System.out.println("(Node) Cannot connect to itself");
 			return;
 		}
 		

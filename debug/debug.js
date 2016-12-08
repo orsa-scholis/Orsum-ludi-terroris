@@ -32,10 +32,20 @@ window.addEventListener("load", function() {
 });
 
 function drawNodes(ctx, obj, size) {
+	var player = obj.player;
+	var monster = obj.monster;
 	for (var i = 0; i < obj.nodes.length; i++) {
 		var node = obj.nodes[i];
 		var x = node[0] * size;
 		var y = size - node[1] * size;
+		
+		if (player[0] == node[0] && player[1] == node[1]) {
+			ctx.fillStyle = "blue";
+		}
+		
+		if (monster[0] == node[0] && monster[1] == node[1]) {
+			ctx.fillStyle = "red";
+		}
 		
 		ctx.beginPath()
 		ctx.arc(x, y, 6, 0, Math.PI * 2, true);
