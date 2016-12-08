@@ -28,4 +28,9 @@ public class Path {
 	public Point getStart() {
 		return this.points.get(0);
 	}
+
+	@Override
+	public String toString() {
+		return "Path [points=" + points + "]";
+	}
 }
