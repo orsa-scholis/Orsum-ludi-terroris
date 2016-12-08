@@ -65,34 +65,4 @@ public class Graph {
 		returnString += "\n}";
 		return returnString;
 	}
-	
-	public String export() {
-		String returnString = "{nodes:[";
-		
-		ArrayList<Connection> connections = new ArrayList<>();
-		ArrayList<Node> allNodes = new ArrayList<>();
-		allNodes.addAll(nodes);
-		allNodes.add(root);
-		allNodes.add(end);
-		for (Node node : allNodes) {
-			returnString += "[" + node.getPoint().getX() + "," + node.getPoint().getY() + "],";
-			
-			for (Connection connection : node.getConnections()) {
-				if (!connections.contains(connection)) {
-					connections.add(connection);
-				}
-			}
-		}
-		returnString = returnString.substring(0, returnString.length() - 1); // remove last comma
-		returnString += "],lines:[";
-		
-		for (Connection connection : connections) {
-			returnString += "[[" + connection.getStart().getPoint().getX() + "," + connection.getStart().getPoint().getY() 
-						 + "],[" + connection.getEnd().getPoint().getX() + "," + connection.getEnd().getPoint().getY() + "]],";
-		}
-		returnString = returnString.substring(0, returnString.length() - 1) + "]"; // remove last comma
-		
-		returnString += "}";
-		return returnString;
-	}
 }

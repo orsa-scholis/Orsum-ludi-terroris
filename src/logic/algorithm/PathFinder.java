@@ -2,7 +2,7 @@ package logic.algorithm;
 
 import java.util.ArrayList;
 
-import logic.Quad;
+import logic.LinearFunction;
 import logic.QuadController;
 import logic.graph.Connection;
 import logic.graph.Graph;
@@ -57,8 +57,38 @@ public class PathFinder {
 		}
 	}
 	
+	private void findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(Player player, Monster monster, QuadController quadController) {
+		@SuppressWarnings("unchecked")
+		ArrayList<Connection> clone = (ArrayList<Connection>)player.getConnections().clone();
+		ArrayList<Connection> playerConnections = clone;
+		
+		Point playerPosition = player.getPoint();
+		System.out.println(playerConnections);
+		for (Connection connection : playerConnections) {
+			Point connectionNodePosition = connection.getEnd().getPoint();
+			
+			LinearFunction function = new LinearFunction(playerPosition, connectionNodePosition);
+			LinearFunction perpendicularFunction = function.getPerpendicularFunction(monster.getPoint());
+			Point interception = function.getInterceptionPoint(perpendicularFunction);
+			
+			if (interception.getX() < 0 || interception.getX() > 1 ||
+				interception.getY() < 0 || interception.getY() > 1) {
+				continue;
+			}
+			
+			if (!quadController.testLineForObstacles(playerPosition, interception)) {
+				Node node = new Node(interception);
+				node.connectTo(player);
+				graph.addNode(node);
+			}
+		}
+	}
+	
 	public Path getBestPathToShootForMonster(Monster monster, Player player, QuadController quadController) {
+		System.out.println(monster);
+		System.out.println(player);
 		integratePlayerAndMonsterIntoGraph(player, monster, quadController);
+		findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player, monster, quadController);
 		
 		return null;
 	}

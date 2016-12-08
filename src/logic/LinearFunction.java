@@ -14,6 +14,30 @@ public class LinearFunction {
 		this.c = (float)p1.getY() - (m * (float)p1.getX());
 	}
 	
+	protected LinearFunction(float m, float c) {
+		super();
+		this.m = m;
+		this.c = c;
+	}
+	
+	public LinearFunction getPerpendicularFunction(Point interception) {
+		float newM = -(1.0f / this.m);
+		float newC = (float)(interception.getY() - newM * interception.getX());
+		
+		return new LinearFunction(newM, newC);
+	}
+	
+	public Point getInterceptionPoint(LinearFunction secondFunction) {
+		if (secondFunction.getM() == this.getM()) { // Die Funktionen sind parallel => Entweder keine oder unendlich viele Schnittpunkte
+			return null;
+		}
+		
+		double x = (secondFunction.getC() - this.c) / (this.m - secondFunction.getM());
+		double y = (double)this.getY((float)x);
+		
+		return new Point(x, y);
+	}
+	
 	public float getY(float x) {
 		return (m * x) + c;
 	}
