@@ -27,7 +27,7 @@ public class PathFinder {
 		for (int i = 0; i < this.graph.getNodes().size(); i++) {
 			Node currentNode = this.graph.getNodes().get(i);
 			
-			for (int j = i; j < this.graph.getNodes().size(); j++) {
+			for (int j = i+1; j < this.graph.getNodes().size(); j++) {
 				Node nodeToConnect = this.graph.getNodes().get(j);
 				
 				Point p1 = currentNode.getPoint();
