@@ -75,7 +75,11 @@ public class Game {
 		String returnString = "{\"size\":"+quadController.getWidth()+",\"nodes\":[";
 
 		ArrayList<Connection> connections = new ArrayList<>();
-		for (Node node : pathFinder.getGraph().getNodes()) {
+		ArrayList<Node> nodes = new ArrayList<>();
+		nodes.addAll(pathFinder.getGraph().getNodes());
+		nodes.add(monster);
+		nodes.add(player);
+		for (Node node : nodes) {
 			returnString += "[" + node.getPoint().getX() + "," + node.getPoint().getY() + "],";
 
 			for (Connection connection : node.getConnections()) {
