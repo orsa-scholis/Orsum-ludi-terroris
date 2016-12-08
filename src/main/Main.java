@@ -1,6 +1,7 @@
 package main;
 
 import logic.*;
+import logic.algorithm.Path;
 import logic.graph.Point;
 
 public class Main {
@@ -21,7 +22,9 @@ public class Main {
 		Game game = new Game(field);
 		game.setMonsterPosition(new Point(0.85, 0.85));
 		System.out.println(game.getQuadController().toStringWithIndices());
-		game.getPathForMonster();
+		Path path = game.getPathForMonster();
+		System.out.println("Path: ");
+		System.out.println(path);
 		game.export("debug/export.txt");
 	}
 }

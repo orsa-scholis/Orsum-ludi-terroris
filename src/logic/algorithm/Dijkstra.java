@@ -30,9 +30,9 @@ public class Dijkstra {
 	}
 
 	public Path getShortestWaysMap() {
-		DijkstraNode activeNode = null;
-		while(activeNode.getMe() != end){
-			activeNode = findNodeWithShortestLength();
+		DijkstraNode activeNode = findNodeWithShortestLength();
+		
+		while (activeNode.getMe() != end) {
 			activeNode.setChecked();
 			for(Connection conn : activeNode.getMe().getConnections()){
 				if(getDnodeFromNode(conn.getEnd()).getLength() > activeNode.getLength() + conn.getLength()){

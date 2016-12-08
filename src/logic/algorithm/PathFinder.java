@@ -1,6 +1,9 @@
 package logic.algorithm;
 
+import java.rmi.UnexpectedException;
 import java.util.ArrayList;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import logic.LinearFunction;
 import logic.QuadController;
@@ -27,7 +30,7 @@ public class PathFinder {
 		for (int i = 0; i < this.graph.getNodes().size(); i++) {
 			Node currentNode = this.graph.getNodes().get(i);
 			
-			for (int j = i; j < this.graph.getNodes().size(); j++) {
+			for (int j = i + 1; j < this.graph.getNodes().size(); j++) {
 				Node nodeToConnect = this.graph.getNodes().get(j);
 				
 				Point p1 = currentNode.getPoint();
@@ -57,10 +60,14 @@ public class PathFinder {
 		}
 	}
 	
-	private void findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(Player player, Monster monster, QuadController quadController) {
+	private void findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(Player player, Monster monster, QuadController quadController) throws UnexpectedException {
+		Object clone = player.getConnections().clone();
+		if (!(clone instanceof ArrayList<?>)) {
+			throw new UnexpectedException("Clone of ArrayList is not an Array");
+		}
+		
 		@SuppressWarnings("unchecked")
-		ArrayList<Connection> clone = (ArrayList<Connection>)player.getConnections().clone();
-		ArrayList<Connection> playerConnections = clone;
+		ArrayList<Connection> playerConnections = (ArrayList<Connection>)clone;
 		
 		Point playerPosition = player.getPoint();
 		System.out.println(playerConnections);
@@ -78,8 +85,12 @@ public class PathFinder {
 			
 			if (!quadController.testLineForObstacles(playerPosition, interception)) {
 				Node node = new Node(interception);
-				node.connectTo(player);
+				node.connectTo(connection.getEnd());
 				graph.addNode(node);
+				
+				if (!quadController.testLineForObstacles(interception, monster.getPoint())) {
+					node.connectTo(monster);
+				}
 			}
 		}
 	}
@@ -88,8 +99,14 @@ public class PathFinder {
 		System.out.println(monster);
 		System.out.println(player);
 		integratePlayerAndMonsterIntoGraph(player, monster, quadController);
-		findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player, monster, quadController);
+		try {
+			findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player, monster, quadController);
+		} catch (UnexpectedException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
+		//return null;
 		Dijkstra dijkstra = new Dijkstra(graph);
 		return dijkstra.getShortestWaysMap();
 	}
