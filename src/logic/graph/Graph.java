@@ -3,6 +3,8 @@ package logic.graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 public class Graph {
 	private Node root;
 	private Node end;
@@ -64,5 +66,21 @@ public class Graph {
 		
 		returnString += "\n}";
 		return returnString;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Graph clone() throws CloneNotSupportedException {
+		Graph graph = new Graph();
+		
+		Object clone = this.nodes.clone();
+		if (!(clone instanceof ArrayList<?>)) {
+			return null;
+		}
+		
+		graph.nodes = (ArrayList<Node>)clone;
+		graph.root = (this.root != null) ? (Node)this.root.clone() : null;
+		graph.end = (this.end != null) ? (Node)this.end.clone() : null;
+		
+		return graph;
 	}
 }
