@@ -49,4 +49,12 @@ public class Node {
 	public String toString() {
 		return "Node [point=" + point + "]";
 	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		@SuppressWarnings("unchecked")
+		ArrayList<Connection> clone2 = (ArrayList<Connection>)this.connections.clone();
+		Node clone = new Node(clone2, new Point(this.point.getX(), this.point.getY()));
+		return clone;
+	}
 }

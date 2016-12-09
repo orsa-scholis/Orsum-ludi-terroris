@@ -41,8 +41,7 @@ public class PathFinder {
 			}
 		}
 	}
-
-	private void integratePlayerAndMonsterIntoGraph(Player player, Monster monster, QuadController quadController) {
+	private void integratePlayerAndMonsterIntoGraph(Player player, Monster monster, QuadController quadController, Graph graph) {
 		graph.setRoot(monster);
 		graph.setEnd(player);
 
@@ -59,7 +58,7 @@ public class PathFinder {
 		}
 	}
 
-	private void findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(Player player, Monster monster, QuadController quadController) throws UnexpectedException {
+	private void findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(Player player, Monster monster, QuadController quadController, Graph graph) throws UnexpectedException {
 		Object clone = player.getConnections().clone();
 		if (!(clone instanceof ArrayList<?>)) {
 			throw new UnexpectedException("Clone of ArrayList is not an Array");
@@ -107,16 +106,24 @@ public class PathFinder {
 	}
 
 	public Path getBestPathToShootForMonster(Monster monster, Player player, QuadController quadController) {
-		System.out.println(monster);
-		System.out.println(player);
-		integratePlayerAndMonsterIntoGraph(player, monster, quadController);
 		try {
-			findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player, monster, quadController);
-		} catch (UnexpectedException e) {
-			e.printStackTrace();
+			Graph graph = this.graph.clone();
+			integratePlayerAndMonsterIntoGraph(player, monster, quadController, graph);
+			try {
+				findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player, monster, quadController, graph);
+			} catch (UnexpectedException e) {
+				e.printStackTrace();
+				return null;
+			}
+
+			return null;
+			/*Dijkstra dijkstra = new Dijkstra(graph);
+			return dijkstra.getShortestWaysMap();*/
+		} catch (CloneNotSupportedException e1) {
+			e1.printStackTrace();
+
 			return null;
 		}
-
 		//return null;
 		Dijkstra dijkstra = new Dijkstra(graph);
 		return dijkstra.getShortestWaysMap();
