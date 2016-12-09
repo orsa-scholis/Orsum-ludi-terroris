@@ -21,31 +21,34 @@ public class User {
 		this.driver = driver;
 		points = null;
 		pointsCount = 0;
+
+		if (points == null) {
+			points = getGame().getPathForMonster().getPoints();
+		}
 	}
 
-	public void update(){
-		if(points == null){
-//			if(getGame().getPathForMonster().getPoints().size() > 0){
-//				points = getGame().getPathForMonster().getPoints();
-//			}
-		}
-//		else if(!points.equals(getGame().getPathForMonster().getPoints())){
-//			points = getGame().getPathForMonster().getPoints();
-//		}
-		else{
+	public void update() {
+		if (points == null) {
+			points = getGame().getPathForMonster().getPoints();
+			pointsCount = 0;
+		} else if (!points.equals(getGame().getPathForMonster().getPoints())) {
+			points = getGame().getPathForMonster().getPoints();
+			pointsCount = 0;
+		} else {
 			getMove().moveTo(getGame().getMonster(), points.get(pointsCount));
+			pointsCount++;
 		}
 
-		if(KeyboardInput.isKeyDown(GLFW_KEY_W)){
+		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
 			getMove().move(getGame().getPlayer(), UP);
 		}
-		if(KeyboardInput.isKeyDown(GLFW_KEY_S)){
+		if (KeyboardInput.isKeyDown(GLFW_KEY_S)) {
 			getMove().move(getGame().getPlayer(), DOWN);
 		}
-		if(KeyboardInput.isKeyDown(GLFW_KEY_A)){
+		if (KeyboardInput.isKeyDown(GLFW_KEY_A)) {
 			getMove().move(getGame().getPlayer(), LEFT);
 		}
-		if(KeyboardInput.isKeyDown(GLFW_KEY_D)){
+		if (KeyboardInput.isKeyDown(GLFW_KEY_D)) {
 			getMove().move(getGame().getPlayer(), RIGHT);
 		}
 
@@ -54,11 +57,11 @@ public class User {
 
 	}
 
-	private Game getGame(){
+	private Game getGame() {
 		return driver.getGame();
 	}
 
-	private Movement getMove(){
+	private Movement getMove() {
 		return driver.getMove();
 	}
 
