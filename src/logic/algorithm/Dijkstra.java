@@ -90,6 +90,7 @@ public class Dijkstra {
 		ArrayList<Node> out = new ArrayList<>();
 		DijkstraNode activeNode = getDnodeFromNode(end);
 		out.add(activeNode.getMe());
+
 		while (activeNode.getMe() != start) {
 			out.add(activeNode.getPrevious());
 			activeNode = getDnodeFromNode(activeNode.getPrevious());

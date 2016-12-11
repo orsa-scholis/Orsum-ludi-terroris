@@ -116,8 +116,8 @@ public class PathFinder {
 				return null;
 			}
 
-			return null;
-			/*Dijkstra dijkstra = new Dijkstra(graph);
+			/*return null;
+			Dijkstra dijkstra = new Dijkstra(graph);
 			return dijkstra.getShortestWaysMap();*/
 		} catch (CloneNotSupportedException e1) {
 			e1.printStackTrace();
