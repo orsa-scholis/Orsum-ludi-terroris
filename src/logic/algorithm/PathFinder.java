@@ -116,18 +116,13 @@ public class PathFinder {
 				return null;
 			}
 
-			/*return null;
 			Dijkstra dijkstra = new Dijkstra(graph);
-			return dijkstra.getShortestWaysMap();*/
+			return dijkstra.getShortestWaysMap();
 		} catch (CloneNotSupportedException e1) {
 			e1.printStackTrace();
 
 			return null;
 		}
-		//return null;
-		Dijkstra dijkstra = new Dijkstra(graph);
-		return dijkstra.getShortestWaysMap();
-
 	}
 
 	public Graph getGraph() {

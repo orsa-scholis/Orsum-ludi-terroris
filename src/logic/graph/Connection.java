@@ -37,7 +37,7 @@ public class Connection {
 			Point p1 = getStart().getPoint();
 			Point p2 = getEnd().getPoint();
 			
-			length = (float)Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2.0) * Math.pow((p1.getY() - p2.getY()), 2.0));
+			length = (float)Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2.0) + Math.pow((p1.getY() - p2.getY()), 2.0));
 		}
 		
 		return length;
