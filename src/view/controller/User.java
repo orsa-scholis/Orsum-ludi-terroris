@@ -31,12 +31,12 @@ public class User {
 		if (points == null) {
 			points = getGame().getPathForMonster().getPoints();
 			pointsCount = 0;
-		} else if (!points.equals(getGame().getPathForMonster().getPoints())) {
-			points = getGame().getPathForMonster().getPoints();
-			pointsCount = 0;
-		} else {
+		} else if(points.size() - 1 > pointsCount){
 			getMove().moveTo(getGame().getMonster(), points.get(pointsCount));
 			pointsCount++;
+		}
+		else{
+			System.out.println("Target reached!");
 		}
 
 		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {

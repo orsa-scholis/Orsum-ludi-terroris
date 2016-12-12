@@ -96,11 +96,6 @@ public class Dijkstra {
 			activeNode = getDnodeFromNode(activeNode.getPrevious());
 		}
 
-//		ArrayList<Node> tmp = out;
-//		for (int i = 0; i < out.size(); i++) {
-//			out.set(i, tmp.get(out.size() - i - 1));
-//		}
-
 		Collections.reverse(out);
 		return new Path(out);
 	}
