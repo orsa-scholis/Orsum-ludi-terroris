@@ -38,8 +38,8 @@ public class Dijkstra {
 			activeNode = findNodeWithShortestLength();
 			activeNode.setChecked();
 			for (Connection conn : activeNode.getMe().getConnections()) {
-				System.out.println(conn.getEnd().getPoint().getX() + ":" + conn.getEnd().getPoint().getY() + " -- "
-						+ conn.getStart().getPoint().getX() + ":" + conn.getStart().getPoint().getY());
+//				System.out.println(conn.getEnd().getPoint().getX() + ":" + conn.getEnd().getPoint().getY() + " -- "
+//						+ conn.getStart().getPoint().getX() + ":" + conn.getStart().getPoint().getY());
 				if (!getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).isChecked()) {
 					if (getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).getLength() > activeNode.getLength()
 							+ conn.getLength()) {
