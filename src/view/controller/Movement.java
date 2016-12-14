@@ -13,6 +13,7 @@ public class Movement {
 	public static int LEFT = 3;
 
 	private Driver driver;
+	private double moveCount;
 
 	public Movement(Driver driver) {
 		this.driver = driver;
@@ -71,8 +72,28 @@ public class Movement {
 		return true;
 	}
 
-	public void moveTo(Node nd, Point point) {
-		nd.setPoint(point);
+	public boolean moveTo(Node nd, Point point, double count) {
+		if(count == 0){
+			moveCount = calcDistance(nd.getPoint(), point) / getFieldSize();
+			System.out.println("--------: " + moveCount + " :--------");
+		}
+
+		Point newP = new Point((point.getX() + (getFieldSize() / 10 * (10 - (count + 1)))), (point.getY() + (getFieldSize() / 10 * ( 10 - (count + 1)))));
+
+		if(nd.getPoint().getX() == newP.getX() && nd.getPoint().getY() == newP.getY()){
+			nd.setPoint(newP);
+			return true;
+		}
+		nd.setPoint(newP);
+		return false;
+	}
+
+	private double getFieldSize() {
+		return 2.0 / driver.getGame().getQuadController().getWidth();
+	}
+
+	private double calcDistance(Point p1, Point p2){
+		return Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2.0) + Math.pow((p1.getY() - p2.getY()), 2.0));
 	}
 
 }

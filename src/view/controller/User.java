@@ -16,11 +16,13 @@ public class User {
 	private Driver driver;
 	private ArrayList<Point> points;
 	private int pointsCount;
+	private double pointMoveCount;
 
 	public User(Driver driver) {
 		this.driver = driver;
 		points = null;
-		pointsCount = 0;
+		pointsCount = 1;
+		pointMoveCount = 0;
 
 		if (points == null) {
 			points = getGame().getPathForMonster().getPoints();
@@ -30,13 +32,18 @@ public class User {
 	public void update() {
 		if (points == null) {
 			points = getGame().getPathForMonster().getPoints();
-			pointsCount = 0;
-		} else if (!points.equals(getGame().getPathForMonster().getPoints())) {
-			points = getGame().getPathForMonster().getPoints();
-			pointsCount = 0;
-		} else {
-			getMove().moveTo(getGame().getMonster(), points.get(pointsCount));
-			pointsCount++;
+			pointsCount = 1;
+		} else if(points.size() - 1 > pointsCount){
+			if(!getMove().moveTo(getGame().getMonster(), points.get(pointsCount), pointMoveCount) && points.get(pointsCount).equals(null)){
+				pointMoveCount ++;
+			}
+			else{
+				pointsCount++;
+				pointMoveCount = 0;
+			}
+		}
+		else{
+			//System.out.println("Target reached!");
 		}
 
 		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
