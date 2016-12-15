@@ -13,10 +13,11 @@ public class Movement {
 	public static int LEFT = 3;
 
 	private Driver driver;
-	private double moveCount;
+	private int moveCount;
 
 	public Movement(Driver driver) {
 		this.driver = driver;
+		this.moveCount = 30;
 	}
 
 	public boolean move(Node nd, int direction) {
@@ -73,18 +74,27 @@ public class Movement {
 	}
 
 	public boolean moveTo(Node nd, Point point, double count) {
-		if(count == 0){
-			moveCount = calcDistance(nd.getPoint(), point) / getFieldSize();
-			System.out.println("--------: " + moveCount + " :--------");
+		Point newP = null;
+		if (count != moveCount - 1) {
+			System.out.println("--------: " + count + " :--------");
+			newP = new Point((point.getX() + (getFieldSize() / moveCount * (moveCount - (count + 1.0)))),
+					(point.getY() + (getFieldSize() / moveCount * (moveCount - (count + 1.0)))));
+
+			System.out.println("ND-P: " + nd.getPoint().getX() + " | " + nd.getPoint().getY());
+			System.out.println(
+					"Minus: " + (newP.getX() - nd.getPoint().getX()) + " | " + (newP.getY() - nd.getPoint().getY()));
+			System.out.println("NewP: " + newP.getX() + " | " + newP.getY());
+			System.out.println("Point: " + point.getX() + " | " + point.getY());
+			System.out.println((getFieldSize() / moveCount * (moveCount - (count + 1.0))));
 		}
-
-		Point newP = new Point((point.getX() + (getFieldSize() / 10 * (10 - (count + 1)))), (point.getY() + (getFieldSize() / 10 * ( 10 - (count + 1)))));
-
-		if(nd.getPoint().getX() == newP.getX() && nd.getPoint().getY() == newP.getY()){
-			nd.setPoint(newP);
+		else {
+			System.out.println("--------: true :--------");
+			System.out.println("");
 			return true;
 		}
 		nd.setPoint(newP);
+		System.out.println("--------: false :--------");
+		System.out.println("");
 		return false;
 	}
 
@@ -92,7 +102,7 @@ public class Movement {
 		return 2.0 / driver.getGame().getQuadController().getWidth();
 	}
 
-	private double calcDistance(Point p1, Point p2){
+	private double calcDistance(Point p1, Point p2) {
 		return Math.sqrt(Math.pow((p1.getX() - p2.getX()), 2.0) + Math.pow((p1.getY() - p2.getY()), 2.0));
 	}
 

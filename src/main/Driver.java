@@ -8,6 +8,7 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
 
 import logic.Game;
+import logic.graph.Point;
 import view.Renderer;
 import view.controller.Movement;
 import view.controller.User;
@@ -56,6 +57,7 @@ public class Driver implements Runnable {
 		};
 
 		game = new Game(field);
+		game.setMonsterPosition(new Point(0.9, 0.82));
 		move = new Movement(this);
 		rend = new Renderer(this);
 		user = new User(this);
@@ -84,6 +86,7 @@ public class Driver implements Runnable {
 		glfwShowWindow(windows);
 		GL.createCapabilities();
 		glViewport(0, 0, height, width);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		shaderMan = ShaderManager.getInstance();
 	}
