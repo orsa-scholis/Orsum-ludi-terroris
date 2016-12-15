@@ -21,29 +21,42 @@ public class User {
 	public User(Driver driver) {
 		this.driver = driver;
 		points = null;
-		pointsCount = 1;
 		pointMoveCount = 0;
 
 		if (points == null) {
-			points = cleanPoints(getGame().getPathForMonster().getPoints());
+			points = getGame().getPathForMonster().getPoints();
+			points.remove(0);
+			points.remove(points.size()-1);
 		}
 	}
 
 	public void update() {
 		if (points == null) {
-			points = cleanPoints(getGame().getPathForMonster().getPoints());
-			pointsCount = 1;
-		} else if(points.size() - 1 > pointsCount){
-			if(!getMove().moveTo(getGame().getMonster(), points.get(pointsCount), pointMoveCount)){
-				pointMoveCount++;
+			points = getGame().getPathForMonster().getPoints();
+			points.remove(0);
+			points.remove(points.size() - 1);
+		}
+		else if(getGame().getMonster().getPoint().getX() != points.get(points.size()-1).getX() && getGame().getMonster().getPoint().getY() != points.get(points.size()-1).getY()){
+			if (pointsCount == 0) {
+				getMove().setupMonsterMovement(getGame().getMonster(), points.get(0));
+				getMove().moveTo(getGame().getMonster(), points.get(0));
+				pointsCount++;
+			}
+			else if(pointsCount < 60 && pointsCount != 0){
+				getMove().moveTo(getGame().getMonster(), points.get(0));
+				pointsCount++;
 			}
 			else{
-				pointsCount++;
-				pointMoveCount = 0;
+				pointsCount = 0;
+				points.remove(0);
+			}
+
+			if (points.size() == 0) {
+				points = null;
 			}
 		}
 		else{
-			//System.out.println("Target reached!");
+			points = null;
 		}
 
 		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
@@ -62,16 +75,6 @@ public class User {
 		QuadController c = getGame().getQuadController();
 		c.quadAtIndex(c.indexForPoint(new Point(0.5, 0.5))).isObstacle();
 
-	}
-
-	private ArrayList<Point> cleanPoints(ArrayList<Point> points){
-		ArrayList<Point> clean = new ArrayList<>();
-		for(Point pt : points){
-			if(pt != null){
-				clean.add(pt);
-			}
-		}
-		return clean;
 	}
 
 	private Game getGame() {
