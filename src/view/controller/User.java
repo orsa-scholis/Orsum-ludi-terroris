@@ -25,17 +25,17 @@ public class User {
 		pointMoveCount = 0;
 
 		if (points == null) {
-			points = getGame().getPathForMonster().getPoints();
+			points = cleanPoints(getGame().getPathForMonster().getPoints());
 		}
 	}
 
 	public void update() {
 		if (points == null) {
-			points = getGame().getPathForMonster().getPoints();
+			points = cleanPoints(getGame().getPathForMonster().getPoints());
 			pointsCount = 1;
 		} else if(points.size() - 1 > pointsCount){
-			if(!getMove().moveTo(getGame().getMonster(), points.get(pointsCount), pointMoveCount) && points.get(pointsCount).equals(null)){
-				pointMoveCount ++;
+			if(!getMove().moveTo(getGame().getMonster(), points.get(pointsCount), pointMoveCount)){
+				pointMoveCount++;
 			}
 			else{
 				pointsCount++;
@@ -62,6 +62,16 @@ public class User {
 		QuadController c = getGame().getQuadController();
 		c.quadAtIndex(c.indexForPoint(new Point(0.5, 0.5))).isObstacle();
 
+	}
+
+	private ArrayList<Point> cleanPoints(ArrayList<Point> points){
+		ArrayList<Point> clean = new ArrayList<>();
+		for(Point pt : points){
+			if(pt != null){
+				clean.add(pt);
+			}
+		}
+		return clean;
 	}
 
 	private Game getGame() {
