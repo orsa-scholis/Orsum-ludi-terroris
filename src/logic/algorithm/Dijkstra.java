@@ -31,7 +31,7 @@ public class Dijkstra {
 		}
 	}
 
-	public Path getShortestWaysMap() {
+	public Path getShortestWaysPath() {
 		DijkstraNode activeNode = findNodeWithShortestLength();
 		while (activeNode.getMe() != end) {
 //			System.out.println("buf" + allNodesAsDN.indexOf(activeNode) + activeNode.isChecked());
