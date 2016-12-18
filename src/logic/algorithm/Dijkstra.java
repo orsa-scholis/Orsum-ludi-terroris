@@ -31,15 +31,15 @@ public class Dijkstra {
 		}
 	}
 
-	public Path getShortestWaysMap() {
+	public Path getShortestWaysPath() {
 		DijkstraNode activeNode = findNodeWithShortestLength();
 		while (activeNode.getMe() != end) {
-			System.out.println("buf" + allNodesAsDN.indexOf(activeNode) + activeNode.isChecked());
+//			System.out.println("buf" + allNodesAsDN.indexOf(activeNode) + activeNode.isChecked());
 			activeNode = findNodeWithShortestLength();
 			activeNode.setChecked();
 			for (Connection conn : activeNode.getMe().getConnections()) {
-				System.out.println(conn.getEnd().getPoint().getX() + ":" + conn.getEnd().getPoint().getY() + " -- "
-						+ conn.getStart().getPoint().getX() + ":" + conn.getStart().getPoint().getY());
+//				System.out.println(conn.getEnd().getPoint().getX() + ":" + conn.getEnd().getPoint().getY() + " -- "
+//						+ conn.getStart().getPoint().getX() + ":" + conn.getStart().getPoint().getY());
 				if (!getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).isChecked()) {
 					if (getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).getLength() > activeNode.getLength()
 							+ conn.getLength()) {
@@ -56,7 +56,7 @@ public class Dijkstra {
 
 	private DijkstraNode findNodeWithShortestLength() {
 		DijkstraNode shortest = new DijkstraNode(new Node(null));
-		;
+
 		for (DijkstraNode dnode : allNodesAsDN) {
 			if (!dnode.isChecked()) {
 				if (dnode.getLength() < shortest.getLength()) {
@@ -95,11 +95,6 @@ public class Dijkstra {
 			out.add(activeNode.getPrevious());
 			activeNode = getDnodeFromNode(activeNode.getPrevious());
 		}
-
-//		ArrayList<Node> tmp = out;
-//		for (int i = 0; i < out.size(); i++) {
-//			out.set(i, tmp.get(out.size() - i - 1));
-//		}
 
 		Collections.reverse(out);
 		return new Path(out);
