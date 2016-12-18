@@ -68,7 +68,6 @@ public class PathFinder {
 		ArrayList<Connection> playerConnections = (ArrayList<Connection>)clone;
 
 		Point playerPosition = player.getPoint();
-		System.out.println(playerConnections);
 		for (Connection connection : playerConnections) {
 			Point connectionNodePosition = connection.getEnd().getPoint();
 
@@ -108,9 +107,11 @@ public class PathFinder {
 	public Path getBestPathToShootForMonster(Monster monster, Player player, QuadController quadController) {
 		try {
 			Graph graph = this.graph.clone();
-			integratePlayerAndMonsterIntoGraph(player, monster, quadController, graph);
+			Monster monsterClone = new Monster((Point)monster.getPoint().clone());
+			Player playerClone = new Player((Point)player.getPoint().clone());
+			integratePlayerAndMonsterIntoGraph(playerClone, monsterClone, quadController, graph);
 			try {
-				findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(player, monster, quadController, graph);
+				findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(playerClone, monsterClone, quadController, graph);
 			} catch (UnexpectedException e) {
 				e.printStackTrace();
 				return null;
