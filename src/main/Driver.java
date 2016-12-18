@@ -39,8 +39,9 @@ public class Driver implements Runnable {
     public static int OBSTACLE = 1;
 
 	public void start(){
-		thread = new Thread(this, "Game");
-		thread.start();
+		/*thread = new Thread(this, "Game");
+		thread.start();*/
+		run();
 	}
 
 	private void init(){
