@@ -16,12 +16,10 @@ public class User {
 	private Driver driver;
 	private ArrayList<Point> points;
 	private int pointsCount;
-	private double pointMoveCount;
 
 	public User(Driver driver) {
 		this.driver = driver;
 		points = null;
-		pointMoveCount = 0;
 
 		if (points == null) {
 			points = getGame().getPathForMonster().getPoints();
@@ -32,9 +30,9 @@ public class User {
 
 	public void update() {
 		if (points == null) {
-//			points = getGame().getPathForMonster().getPoints();
-//			points.remove(0);
-//			points.remove(points.size() - 1);
+			points = getGame().getPathForMonster().getPoints();
+			points.remove(0);
+			points.remove(points.size() - 1);
 		}
 		else if(getGame().getMonster().getPoint().getX() != points.get(points.size()-1).getX() && getGame().getMonster().getPoint().getY() != points.get(points.size()-1).getY()){
 			if (pointsCount == 0) {
