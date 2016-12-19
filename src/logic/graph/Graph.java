@@ -3,28 +3,26 @@ package logic.graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 public class Graph {
 	private Node root;
 	private Node end;
 	private ArrayList<Node> nodes;
-	
+
 	public Graph() {
 		super();
 		this.nodes = new ArrayList<>();
 	}
-	
+
 	public Graph(Node root, ArrayList<Node> nodes) {
 		super();
 		this.root = root;
 		this.nodes = nodes;
 	}
-	
+
 	public void addNode(Node node) {
 		this.nodes.add(node);
 	}
-	
+
 	public void removeNode(Node node) {
 		this.nodes.remove(node);
 	}
@@ -44,7 +42,7 @@ public class Graph {
 	public void setNodes(ArrayList<Node> nodes) {
 		this.nodes = nodes;
 	}
-	
+
 	public Node getEnd() {
 		return end;
 	}
@@ -57,43 +55,43 @@ public class Graph {
 		String returnString = "nodes: {";
 		for (Iterator<Node> iterator = nodes.iterator(); iterator.hasNext();) {
 			Node node = (Node)iterator.next();
-			
+
 			double x = node.getPoint().getX() * fieldSize;
 			double y = node.getPoint().getY() * fieldSize;
-			
+
 			returnString += "\n" + x + "\t" + y;
 		}
-		
+
 		returnString += "\n}";
 		return returnString;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Graph clone() throws CloneNotSupportedException {
 		Graph graph = new Graph();
-		
+
 		for (Node node : this.nodes) {
 			Node newNode = new Node(node.getPoint());
 			graph.getNodes().add(newNode);
 		}
-		
+
 		graph.setRoot(this.root != null ? new Node(this.root.getPoint()) : null);
 		graph.setEnd(this.end != null ? new Node(this.end.getPoint()) : null);
-		
+
 		for (int i = 0; i < this.nodes.size(); i++) {
 			Node oldNode = nodes.get(i);
 			Node newNode = graph.getNodes().get(i);
-			
+
 			for (Connection connection : oldNode.getConnections()) {
 				Node oldCounterpart = connection.getCounterpart(oldNode);
 				int oldCounterpartNodeIndex = nodes.indexOf(oldCounterpart);
 				if (oldCounterpartNodeIndex >= 0) {
 					// In array
-					
+
 					newNode.connectTo(graph.getNodes().get(oldCounterpartNodeIndex));
 				} else {
 					// Not in array
-					
+
 					if (oldCounterpart.equals(this.root)) {
 						newNode.connectTo(graph.getRoot());
 					} else if (oldCounterpart.equals(this.end)) {
@@ -104,7 +102,7 @@ public class Graph {
 				}
 			}
 		}
-		
+
 		if (this.root != null && this.end != null) {
 			for (Connection rootConnection : this.getRoot().getConnections()) {
 				if (rootConnection.getCounterpart(root).equals(this.end)) {
@@ -112,18 +110,18 @@ public class Graph {
 				}
 			}
 		}
-		
+
 		return graph;
-		
+
 		/*Object clone = this.nodes.clone();
 		if (!(clone instanceof ArrayList<?>)) {
 			return null;
 		}
-		
+
 		graph.nodes = (ArrayList<Node>)clone;
 		graph.root = (this.root != null) ? (Node)this.root.clone() : null;
 		graph.end = (this.end != null) ? (Node)this.end.clone() : null;
-		
+
 		return graph;*/
 	}
 
@@ -178,22 +176,22 @@ public class Graph {
 		}
 		return true;
 	}
-	
+
 	public String uniqueExportString() {
 		String output = "<Graph, nodes: [";
 		for (Node node : nodes) {
 			output += "\n" + node + ", connections: ";
-			
+
 			for (Connection connection : node.getConnections()) {
 				output += "\n\t" + connection.getCounterpart(node) + ", ";
 			}
-			
+
 			output += "],";
 		}
-		
+
 		output += "\nroot: " + root + ", ";
 		output += "\nend: " + end + ">";
-		
+
 		return output;
 	}
 }

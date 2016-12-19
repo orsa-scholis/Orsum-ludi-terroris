@@ -3,8 +3,6 @@ package logic.algorithm;
 import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import logic.LinearFunction;
 import logic.QuadController;
 import logic.graph.Connection;
