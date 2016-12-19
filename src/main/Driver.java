@@ -87,7 +87,6 @@ public class Driver {
 
 
 	public void run(){
-		init();
 		long lastTime = System.nanoTime();
 		double delta = 0.0;
 		double ns = 1000000000.0 / 60.0;
@@ -128,7 +127,9 @@ public class Driver {
 	}
 
 	public static void main(String[] args) {
-		new Driver().run();
+		Driver driver = new Driver();
+		driver.init();
+		driver.run();
 	}
 
 	public Game getGame() {
