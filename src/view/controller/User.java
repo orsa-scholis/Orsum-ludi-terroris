@@ -32,9 +32,9 @@ public class User {
 
 	public void update() {
 		if (points == null) {
-			points = getGame().getPathForMonster().getPoints();
-			points.remove(0);
-			points.remove(points.size() - 1);
+//			points = getGame().getPathForMonster().getPoints();
+//			points.remove(0);
+//			points.remove(points.size() - 1);
 		}
 		else if(getGame().getMonster().getPoint().getX() != points.get(points.size()-1).getX() && getGame().getMonster().getPoint().getY() != points.get(points.size()-1).getY()){
 			if (pointsCount == 0) {
@@ -42,7 +42,7 @@ public class User {
 				getMove().moveTo(getGame().getMonster(), points.get(0));
 				pointsCount++;
 			}
-			else if(pointsCount < 60 && pointsCount != 0){
+			else if(pointsCount < 120 && pointsCount != 0){
 				getMove().moveTo(getGame().getMonster(), points.get(0));
 				pointsCount++;
 			}
@@ -61,15 +61,27 @@ public class User {
 
 		if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
 			getMove().move(getGame().getPlayer(), UP);
+			if(getGame().getQuadController().testLineForObstacles(getGame().getMonster().getPoint(), getGame().getPlayer().getPoint())){
+				points = null;
+			}
 		}
 		if (KeyboardInput.isKeyDown(GLFW_KEY_S)) {
 			getMove().move(getGame().getPlayer(), DOWN);
+			if(getGame().getQuadController().testLineForObstacles(getGame().getMonster().getPoint(), getGame().getPlayer().getPoint())){
+				points = null;
+			}
 		}
 		if (KeyboardInput.isKeyDown(GLFW_KEY_A)) {
 			getMove().move(getGame().getPlayer(), LEFT);
+			if(getGame().getQuadController().testLineForObstacles(getGame().getMonster().getPoint(), getGame().getPlayer().getPoint())){
+				points = null;
+			}
 		}
 		if (KeyboardInput.isKeyDown(GLFW_KEY_D)) {
 			getMove().move(getGame().getPlayer(), RIGHT);
+			if(getGame().getQuadController().testLineForObstacles(getGame().getMonster().getPoint(), getGame().getPlayer().getPoint())){
+				points = null;
+			}
 		}
 
 		QuadController c = getGame().getQuadController();

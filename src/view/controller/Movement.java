@@ -19,7 +19,7 @@ public class Movement {
 
 	public Movement(Driver driver) {
 		this.driver = driver;
-		this.moveCount = 60;
+		this.moveCount = 120;
 		this.moveDistanceX = 0.0;
 		this.moveDistanceY = 0.0;
 	}
