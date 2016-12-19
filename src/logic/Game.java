@@ -45,7 +45,7 @@ public class Game {
 	protected void setup() {
 		pathFinder = new PathFinder(quadController.getGraphNodesWithObstacles(), quadController);
 
-		System.out.println(pathFinder.getGraph().toString(quadController.getDWidth()));
+		//System.out.println(pathFinder.getGraph().toString(quadController.getDWidth()));
 	}
 
 	public Path getPathForMonster() {
@@ -128,5 +128,12 @@ public class Game {
 
 	public Monster getMonster() {
 		return monster;
+	}
+
+	/**
+	 * @return the pathFinder
+	 */
+	public PathFinder getPathFinder() {
+		return pathFinder;
 	}
 }

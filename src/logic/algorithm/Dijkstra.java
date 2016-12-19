@@ -18,7 +18,8 @@ public class Dijkstra {
 		this.start = graph.getRoot();
 		this.end = graph.getEnd();
 
-		allNodes = (ArrayList<Node>) graph.getNodes().clone();
+		allNodes = graph.getNodes();
+		//allNodes = (ArrayList<Node>) graph.getNodes().clone();
 		allNodes.add(start);
 		allNodes.add(end);
 		allNodesAsDN = new ArrayList<>();

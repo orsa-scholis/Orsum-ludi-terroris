@@ -32,6 +32,16 @@ public class Connection {
 		this.lengthDirty = true;
 	}
 	
+	public Node getCounterpart(Node thisNode) {
+		if (thisNode.equals(start.get())) {
+			return end.get();
+		} else if (thisNode.equals(end.get())) {
+			return start.get();
+		} else {
+			return null;
+		}
+	}
+	
 	public float getLength() {
 		if (lengthDirty) {
 			Point p1 = getStart().getPoint();
