@@ -69,6 +69,7 @@ public class Dijkstra {
 	}
 
 	private DijkstraNode getDnodeFromNode(Node node) {
+		try{
 		if (allNodesAsDN.get(allNodes.indexOf(node)).getMe() == node) {
 			return allNodesAsDN.get(allNodes.indexOf(node));
 		}
@@ -76,6 +77,10 @@ public class Dijkstra {
 			if (dnode.getMe() == node) {
 				return dnode;
 			}
+		}
+		}catch (ArrayIndexOutOfBoundsException e){
+			System.out.println(node.toString());
+			e.printStackTrace();
 		}
 		return null;
 	}

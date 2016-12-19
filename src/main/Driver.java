@@ -16,9 +16,8 @@ import view.graphicEngine.ShaderManager;
 import view.input.KeyboardInput;
 import view.input.MouseInput;
 
-public class Driver implements Runnable {
+public class Driver {
 
-	private Thread thread;
 	private boolean running = false;
 	private long windows;
 	private int height = 1000;
@@ -37,12 +36,6 @@ public class Driver implements Runnable {
 
     public static int FIELD = 0;
     public static int OBSTACLE = 1;
-
-	public void start(){
-		/*thread = new Thread(this, "Game");
-		thread.start();*/
-		run();
-	}
 
 	private void init(){
 
@@ -135,7 +128,7 @@ public class Driver implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		new Driver().start();
+		new Driver().run();
 	}
 
 	public Game getGame() {
