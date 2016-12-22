@@ -1,11 +1,15 @@
 package main;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.lwjgl.glfw.GLFWCursorPosCallback;
+import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.system.Platform;
 
 import logic.Game;
 import logic.graph.Point;
@@ -20,9 +24,8 @@ public class Driver {
 
 	private boolean running = false;
 	private long windows;
-	private int height = 1000;
-	private int width = 1000;
-
+	private int height = 330;
+	private int width = 330;
 	@SuppressWarnings("unused")
 	private GLFWKeyCallback keyCallback;
 	@SuppressWarnings("unused")
@@ -37,7 +40,7 @@ public class Driver {
     public static int FIELD = 0;
     public static int OBSTACLE = 1;
 
-	private void init(){
+	public void init(){
 
 		int[][] field = new int[][] {
             { FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD, FIELD },
@@ -59,27 +62,49 @@ public class Driver {
 	}
 
 
-	private void graficInit(){
+	public void graficInit(){
+		if (Platform.get() == Platform.MACOSX) {
+			java.awt.Toolkit.getDefaultToolkit();
+		}
 
 		if(!glfwInit()){
 			System.err.println("Initialisierung fehlgeschlagen!");
 		}
 
+		GLFWErrorCallback.createPrint(System.err).set();
+		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		windows = glfwCreateWindow(height, width, "Monstergame", NULL, NULL);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		windows = glfwCreateWindow(width, height, "Monstergame", NULL, NULL);
 
 		if(windows == NULL){
 			System.err.println("Fenster konnte nicht erstellt werden!");
 		}
 
-		glfwSetKeyCallback(windows, keyCallback = new KeyboardInput());
+		glfwSetKeyCallback(windows, (window, key, scancode, action, mods) -> {
+			System.out.println("Key callbacks");
+			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+				glfwSetWindowShouldClose(window, true); // We will detect this in our rendering loop
+		});
 		glfwSetCursorPosCallback(windows, cursorCallback = new MouseInput());
+		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		glfwSetWindowPos(
+			windows,
+			(vidmode.width() - width) / 2,
+			(vidmode.height() - height) / 2
+		);
+
 		glfwMakeContextCurrent(windows);
+		glfwSwapInterval(1);
 		glfwShowWindow(windows);
 		GL.createCapabilities();
-		glViewport(0, 0, height, width);
+		glViewport(0, 0, width, height);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
+		System.out.println("OpenGL version " + glGetString(GL_VERSION));
 		shaderMan = ShaderManager.getInstance();
 	}
 
@@ -112,6 +137,11 @@ public class Driver {
 				running = false;
 			}
 		}
+
+		glfwFreeCallbacks(windows);
+		glfwDestroyWindow(windows);
+		glfwTerminate();
+		glfwSetErrorCallback(null).free();
 	}
 
 	private void update(){
@@ -121,6 +151,7 @@ public class Driver {
 
 	private void render(){
 		glfwSwapBuffers(windows);
+		glClear(GL_COLOR_BUFFER_BIT);
 		rend.render();
 	}
 

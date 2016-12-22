@@ -33,10 +33,10 @@ public class QuadController {
 	}
 	
 	public boolean testLineForObstacles(Point start, Point end) {
-		if (start.getX() < 0 || end.getX() < 0 ||
-			start.getX() > 1 || end.getX() > 1 ||
-			start.getY() < 0 || end.getY() < 0 ||
-			start.getY() > 1 || end.getY() > 1) {
+		if (start.getX() <= 0 || end.getX() <= 0 ||
+			start.getX() >= 1 || end.getX() >= 1 ||
+			start.getY() <= 0 || end.getY() <= 0 ||
+			start.getY() >= 1 || end.getY() >= 1) {
 			return true;
 		}
 		
