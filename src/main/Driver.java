@@ -1,7 +1,6 @@
 package main;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -60,7 +59,6 @@ public class Driver {
 		rend = new Renderer(this);
 		user = new User(this);
 		running = true;
-
 	}
 
 
@@ -68,7 +66,7 @@ public class Driver {
 		if (Platform.get() == Platform.MACOSX) {
 			java.awt.Toolkit.getDefaultToolkit();
 		}
-		
+
 		if(!glfwInit()){
 			System.err.println("Initialisierung fehlgeschlagen!");
 		}
@@ -98,14 +96,14 @@ public class Driver {
 			(vidmode.width() - width) / 2,
 			(vidmode.height() - height) / 2
 		);
-		
+
 		glfwMakeContextCurrent(windows);
 		glfwSwapInterval(1);
 		glfwShowWindow(windows);
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		
+
 		System.out.println("OpenGL version " + glGetString(GL_VERSION));
 		shaderMan = ShaderManager.getInstance();
 	}
@@ -139,7 +137,7 @@ public class Driver {
 				running = false;
 			}
 		}
-		
+
 		glfwFreeCallbacks(windows);
 		glfwDestroyWindow(windows);
 		glfwTerminate();

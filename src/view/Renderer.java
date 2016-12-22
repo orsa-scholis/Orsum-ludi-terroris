@@ -2,6 +2,8 @@ package view;
 
 import java.util.ArrayList;
 
+import org.lwjgl.opengl.GL11;
+
 import logic.Index2D;
 import logic.Quad;
 import main.Driver;
@@ -19,6 +21,8 @@ public class Renderer {
 	}
 
 	public void render() {
+
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
 		for (Quad quady : getQuads()) {
 
