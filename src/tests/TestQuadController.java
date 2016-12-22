@@ -90,7 +90,8 @@ public class TestQuadController {
 				new Point(4.0/8.0, 4.0/8.0),
 				new Point(0.0/8.0, 0.0/8.0),
 				new Point(0.0/8.0, 0.0/8.0),
-				new Point(1.0/8.0, 7.0/8.0)
+				new Point(1.0/8.0, 7.0/8.0),
+				new Point(0.09999999962747097, 0.5999999996274689)
 		};
 		
 		Point[] point2s = new Point[] {
@@ -102,11 +103,12 @@ public class TestQuadController {
 				new Point(1.0/8.0, 7.0/8.0),
 				new Point(2.0/8.0, 7.0/8.0),
 				new Point(1.0/8.0, 7.0/8.0),
-				new Point(0.0/8.0, 0.0/8.0)
+				new Point(0.0/8.0, 0.0/8.0),
+				new Point(0.4000000000000002, 0.7900000000000005)
 		};
 		
 		boolean[] solutions = new boolean[] {
-				false, true, true, false, false, true, true, false, false
+				false, true, true, false, false, true, true, false, false, true
 		};
 		
 		for (int i = 0; i < point1s.length; i++) {
