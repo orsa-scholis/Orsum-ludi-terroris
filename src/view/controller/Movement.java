@@ -31,14 +31,14 @@ public class Movement {
 		switch (direction) {
 		case 0:
 			if (isThereNoObstacle(posX, posY + 0.01)) {
-				if ((posY += 0.01) > 1.0) {
+				if ((posY += 0.01) > 0.99) {
 					posY = 0.99;
 				}
 			}
 			break;
 		case 1:
 			if (isThereNoObstacle(posX + 0.01, posY)) {
-				if ((posX += 0.01) > 1.0) {
+				if ((posX += 0.01) > 0.99) {
 					posX = 0.99;
 				}
 			}
@@ -61,6 +61,7 @@ public class Movement {
 			return false;
 		}
 		nd.setPoint(new Point(posX, posY));
+
 		return true;
 	}
 
