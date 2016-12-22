@@ -2,6 +2,12 @@ package logic;
 
 import logic.graph.Point;
 
+/**
+ * Diese Klasse repräsentiert einen zweidimensionalen Index. Gespeichert wird der in Form eines Vektors.
+ * Der X- und Y-Wert kann dabei eine natürliche Zahl zwischen 0 und n annehmen, wobei n die grösse des Feldes in Blocks pro Zeile/Spalte ist
+ * @author lukasbischof
+ *
+ */
 public class Index2D {
 	private int x;
 	private int y;

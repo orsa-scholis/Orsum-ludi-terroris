@@ -14,6 +14,12 @@ import logic.graph.Node;
 import logic.graph.Player;
 import logic.graph.Point;
 
+/**
+ * Diese Klasse repräsentert das Spiel an sich un bietet wichtige Funktionen für die Interaktion zwischen Algorithmus/Backend
+ * und Presentation/View/Frontend
+ * @author Lukas Bischof
+ *
+ */
 public class Game {
 	private QuadController quadController;
 	private PathFinder pathFinder;
@@ -48,10 +54,18 @@ public class Game {
 		//System.out.println(pathFinder.getGraph().toString(quadController.getDWidth()));
 	}
 
+	/**
+	 * Gibt den idealen Pfad zum Abschuss auf den Player von dem Monster
+	 * @return Den Pfad
+	 */
 	public Path getPathForMonster() {
 		return pathFinder.getBestPathToShootForMonster(monster, player, quadController);
 	}
 
+	/**
+	 * Mit dieser Methode kann man ein export file zum debuggen erstellen
+	 * @param path
+	 */
 	public void export(String path) {
 		BufferedWriter writer = null;
 		try {

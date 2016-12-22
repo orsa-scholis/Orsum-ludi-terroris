@@ -2,10 +2,20 @@ package logic;
 
 import logic.graph.Point;
 
+/**
+ * Eine lineare Funktion
+ * @author lukasbischof
+ *
+ */
 public class LinearFunction {
 	private float m;
 	private float c;
 	
+	/**
+	 * Eine Funktion erstellen, die durch die Punkte p1 und p2 geht
+	 * @param p1 Der erste Schnittpunkt
+	 * @param p2 Der zweite Schnittpunkt
+	 */
 	public LinearFunction(Point p1, Point p2) {
 		float deltaY = (float)(p2.getY() - p1.getY());
 		float deltaX = (float)(p2.getX() - p1.getX());
@@ -20,6 +30,11 @@ public class LinearFunction {
 		this.c = c;
 	}
 	
+	/**
+	 * Gibt eine lineare Funktion zurück, die rechtwinklig zu diese Funktion ist und durch den Punkt interception geht.
+	 * @param interception
+	 * @return
+	 */
 	public LinearFunction getPerpendicularFunction(Point interception) {
 		float newM = -(1.0f / this.m);
 		float newC = (float)(interception.getY() - newM * interception.getX());
@@ -27,6 +42,11 @@ public class LinearFunction {
 		return new LinearFunction(newM, newC);
 	}
 	
+	/**
+	 * Gibt den Schnittpunkt zwischen dieser Funktion und der gegebenen Funktion zurück
+	 * @param secondFunction Die andere Funktion
+	 * @return Der Schnittpunkt
+	 */
 	public Point getInterceptionPoint(LinearFunction secondFunction) {
 		if (secondFunction.getM() == this.getM()) { // Die Funktionen sind parallel => Entweder keine oder unendlich viele Schnittpunkte
 			return null;

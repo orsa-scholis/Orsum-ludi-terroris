@@ -6,6 +6,8 @@ import logic.graph.Point;
 
 public class Main {
 	public static void main(String[] args) {
+		// Test-main methode
+		
 		int[][] field = new int[][] {
 			// Bottom
 			{ 0, 0, 0, 0, 0, 0, 0, 0 },

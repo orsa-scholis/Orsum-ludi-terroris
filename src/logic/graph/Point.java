@@ -2,6 +2,13 @@ package logic.graph;
 
 import logic.Index2D;
 
+/**
+ * 
+ * @author lukas bischof
+ * @class Point
+ * @description Die Klasse Point repräsentiert einen Punkt auf dem Feld. Damit er auf jede grösse des Fensters skalierbar ist,
+ * wurde x auf 0-1 und y auf 0-1 "beschränkt".
+ */
 public class Point {
 	private double x;
 	private double y;
@@ -40,6 +47,11 @@ public class Point {
 		this.y = y;
 	}
 
+	/**
+	 * Konvertierung zu einem zweidimensionalem Index
+	 * @param fieldSize Die grösse des Feldes in anzahl Blocks pro Zeile/Spalte
+	 * @return Der index
+	 */
 	public Index2D toIndex2d(double fieldSize) {
 		return new Index2D((int)Math.floor(x * fieldSize), (int)Math.floor(y * fieldSize));
 	}
