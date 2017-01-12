@@ -8,7 +8,7 @@ import static view.utils.Utilities.loadShader;
 
 /**
 *
-* Diese ist eine Hilfsklasse die für die Initialiserung von vertexShader-Dateien und FragmentShader-Dateien sorgt.
+* Diese ist eine Hilfsklasse die fÃ¼r die Initialiserung von vertexShader-Dateien und FragmentShader-Dateien sorgt.
 *
 */
 public class Shader {
@@ -18,8 +18,8 @@ public class Shader {
 	private int fragmentShaderID;
 
 	public Shader(String vertexFile, String fragmentFile) {
-		vertexShaderID = loadShader(vertexFile, GL_VERTEX_SHADER);
-		fragmentShaderID = loadShader(fragmentFile, GL_FRAGMENT_SHADER);
+		vertexShaderID = loadShader(getClass().getResourceAsStream(vertexFile), GL_VERTEX_SHADER);
+		fragmentShaderID = loadShader(getClass().getResourceAsStream(fragmentFile), GL_FRAGMENT_SHADER);
 
 		programID = glCreateProgram();
 		glAttachShader(programID, fragmentShaderID);
