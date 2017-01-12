@@ -112,9 +112,6 @@ public class TestAlgorithm {
 		for (int i = 0; i < itr; i++) {
 			long start = System.currentTimeMillis();
 			
-			/*System.out.println(i + ":");
-			System.out.println(game.getPathFinder().getGraph().uniqueExportString());*/
-			
 			Path path = game.getPathForMonster();
 			if (null == path) {
 				fail("Can't measure performance. Missing returned path");

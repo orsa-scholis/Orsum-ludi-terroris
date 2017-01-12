@@ -3,6 +3,11 @@ package logic.graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Diese Klasse repräsentiert den Graphen
+ * @author lukasbischof
+ *
+ */
 public class Graph {
 	private Node root;
 	private Node end;
@@ -13,6 +18,11 @@ public class Graph {
 		this.nodes = new ArrayList<>();
 	}
 
+	/**
+	 * Erstellt einen Graphen mit einer Root-Node, sowie mit anderen, verschiedenen Nodes
+	 * @param root	Die Root-Node
+	 * @param nodes	Die anderen Nodes
+	 */
 	public Graph(Node root, ArrayList<Node> nodes) {
 		super();
 		this.root = root;
@@ -51,6 +61,11 @@ public class Graph {
 		this.end = end;
 	}
 
+	/**
+	 * Exportiert den Graphen in ein JSON-Format
+	 * @param fieldSize	Die Grösse des Feldes
+	 * @return Den Export-String
+	 */
 	public String toString(double fieldSize) {
 		String returnString = "nodes: {";
 		for (Iterator<Node> iterator = nodes.iterator(); iterator.hasNext();) {
@@ -66,7 +81,6 @@ public class Graph {
 		return returnString;
 	}
 
-	@SuppressWarnings("unchecked")
 	public Graph clone() throws CloneNotSupportedException {
 		Graph graph = new Graph();
 
@@ -78,6 +92,7 @@ public class Graph {
 		graph.setRoot(this.root != null ? new Node(this.root.getPoint()) : null);
 		graph.setEnd(this.end != null ? new Node(this.end.getPoint()) : null);
 
+		// Alle Nodes neu verbinden
 		for (int i = 0; i < this.nodes.size(); i++) {
 			Node oldNode = nodes.get(i);
 			Node newNode = graph.getNodes().get(i);
@@ -112,17 +127,6 @@ public class Graph {
 		}
 
 		return graph;
-
-		/*Object clone = this.nodes.clone();
-		if (!(clone instanceof ArrayList<?>)) {
-			return null;
-		}
-
-		graph.nodes = (ArrayList<Node>)clone;
-		graph.root = (this.root != null) ? (Node)this.root.clone() : null;
-		graph.end = (this.end != null) ? (Node)this.end.clone() : null;
-
-		return graph;*/
 	}
 
 	/* (non-Javadoc)
