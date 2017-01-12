@@ -5,6 +5,12 @@ import logic.graph.Node;
 import logic.graph.Point;
 import main.Driver;
 
+/**
+*
+* Diese Klasse kümmert sich um die Bewegung des Monsters und des Spielers.
+* Hierbei werden die Datensätze des jeweiligen angepasst und im nächsten Rendervorgang neu gerendert.
+*
+*/
 public class Movement {
 
 	public static int UP = 0;
@@ -25,7 +31,7 @@ public class Movement {
 	}
 
 	public boolean move(Node nd, int direction) {
-		System.out.println("-------------Move----------------");
+		//System.out.println("-------------Move----------------");
 		double posX = nd.getPoint().getX();
 		double posY = nd.getPoint().getY();
 		switch (direction) {

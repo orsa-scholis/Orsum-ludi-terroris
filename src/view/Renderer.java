@@ -12,6 +12,12 @@ import logic.graph.Monster;
 import logic.graph.Player;
 import view.graphicEngine.Shader;
 
+/**
+*
+* Diese Klasse zeichnet die einzelnen Elemente, hierbei wird die Hilfsklasse Object verwendet.
+* Jedes zu zeichnende Objekt (Monster, Player, Hindernisse) bekommt ein Object, dass an den angegebenen Koordinaten ein Quadrat renderet.
+*
+*/
 public class Renderer {
 
 	private Driver driver;

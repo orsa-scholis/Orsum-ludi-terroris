@@ -1,5 +1,15 @@
 package view.graphicEngine;
 
+/**
+*
+* Diese Klasse kümmert sich um das Verwalten von Shadern.
+*
+* Wir haben hier 3 Shader erstellt:
+* Den shaderObstacle, dieser wird für die Hindernisse verwendet. Er färbt das Feld schwarz.
+* Den shaderPlayer, dieser wird für den Spieler verwendet. Er färbt das Feld blau.
+* Den shaderMonster, dieser wird für das Monster verwendet. Er färbt das Feld rot.
+*
+*/
 public class ShaderManager {
 
 	private static ShaderManager instance;
