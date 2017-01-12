@@ -2,12 +2,12 @@ package view.graphicEngine;
 
 /**
 *
-* Diese Klasse kümmert sich um das Verwalten von Shadern.
+* Diese Klasse kÃ¼mmert sich um das Verwalten von Shadern.
 *
 * Wir haben hier 3 Shader erstellt:
-* Den shaderObstacle, dieser wird für die Hindernisse verwendet. Er färbt das Feld schwarz.
-* Den shaderPlayer, dieser wird für den Spieler verwendet. Er färbt das Feld blau.
-* Den shaderMonster, dieser wird für das Monster verwendet. Er färbt das Feld rot.
+* Den shaderObstacle, dieser wird fÃ¼r die Hindernisse verwendet. Er fÃ¤rbt das Feld schwarz.
+* Den shaderPlayer, dieser wird fÃ¼r den Spieler verwendet. Er fÃ¤rbt das Feld blau.
+* Den shaderMonster, dieser wird fÃ¼r das Monster verwendet. Er fÃ¤rbt das Feld rot.
 *
 */
 public class ShaderManager {
@@ -26,9 +26,9 @@ public class ShaderManager {
 	}
 
 	private ShaderManager(){
-		shaderObstacle = new Shader("src/view/shaders/vertex.shader", "src/view/shaders/fragment.shader");
-		shaderPlayer = new Shader("src/view/shaders/vertexPlayer.shader", "src/view/shaders/fragment.shader");
-		shaderMonster = new Shader("src/view/shaders/vertexMonster.shader", "src/view/shaders/fragment.shader");
+		shaderObstacle = new Shader("/view/shaders/vertex.shader", "/view/shaders/fragment.shader");
+		shaderPlayer = new Shader("/view/shaders/vertexPlayer.shader", "/view/shaders/fragment.shader");
+		shaderMonster = new Shader("/view/shaders/vertexMonster.shader", "/view/shaders/fragment.shader");
 	}
 
 
