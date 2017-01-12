@@ -12,12 +12,9 @@ public class Path {
 		super();
 
 		this.points = new ArrayList<>();
-		for(Node node : nodes){
+		for (Node node : nodes){
 			points.add(node.getPoint());
 		}
-		/*nodes.stream().forEach((node) -> {
-			points.add(node.getPoint());
-		});*/
 	}
 
 	public ArrayList<Point> getPoints() {

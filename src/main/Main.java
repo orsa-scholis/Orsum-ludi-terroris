@@ -6,8 +6,10 @@ import logic.graph.Point;
 
 public class Main {
 	public static void main(String[] args) {
+		// Test-main methode
+		
 		int[][] field = new int[][] {
-			// Bottom
+			// Bottom (y=0)
 			{ 0, 0, 0, 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0 },
 			{ 0, 0, 1, 0, 0, 0, 0, 0 },
@@ -16,7 +18,7 @@ public class Main {
 			{ 0, 1, 1, 0, 0, 1, 0, 0 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0 }
-			// Top
+			// Top (y=7)
 		};
 
 		Game game = new Game(field);

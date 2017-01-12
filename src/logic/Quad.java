@@ -1,5 +1,10 @@
 package logic;
 
+/**
+ * Repräsentiert ein Quadrat auf dem Spielfeld. Dies kann entweder ein freies Feld oder ein Hindernis sein.
+ * @author lukasbischof
+ *
+ */
 public class Quad {
 	private Index2D index;
 	private boolean isObstacle;

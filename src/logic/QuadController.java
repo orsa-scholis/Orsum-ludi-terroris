@@ -9,6 +9,11 @@ final class Constants {
 	public static float OBSTACLE_CORNER_NODE_PADDING = 0.2f;
 }
 
+/**
+ * Diese Klasse repräsentiert das Spielfeld
+ * @author lukasbischof
+ *
+ */
 public class QuadController {
 	private ArrayList<Quad> quads = new ArrayList<>();
 	private int width;
@@ -32,6 +37,12 @@ public class QuadController {
 		}
 	}
 	
+	/**
+	 * Testet, ob zwischen dem start und dem endpunkt ein Hindernis liegt
+	 * @param start Der Startpunkt
+	 * @param end Der Endpunkt
+	 * @return Ein bool ob ein Hindernis dazwischen ist.
+	 */
 	public boolean testLineForObstacles(Point start, Point end) {
 		if (start.getX() <= 0 || end.getX() <= 0 ||
 			start.getX() >= 1 || end.getX() >= 1 ||

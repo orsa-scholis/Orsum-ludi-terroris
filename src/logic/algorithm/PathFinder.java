@@ -12,10 +12,20 @@ import logic.graph.Node;
 import logic.graph.Player;
 import logic.graph.Point;
 
+/**
+ * Diese Klasse ist dazu da, den besten Pfad für ein Monster zum Player zu erhalten
+ * @author Lukas Bischof
+ *
+ */
 public class PathFinder {
 	private Graph graph;
 	private QuadController quadController;
 
+	/**
+	 * Der designierte Konstruktor
+	 * @param nodes	Alle Nodes, die dazu verwendet werden können, um den Graphen zu generieren.
+	 * @param quadController	Der QuadController
+	 */
 	public PathFinder(ArrayList<Node> nodes, QuadController quadController) {
 		super();
 		this.graph = new Graph(null, nodes);
@@ -24,6 +34,9 @@ public class PathFinder {
 		connectNodes();
 	}
 
+	/**
+	 * Private Methode um die einzelnen Nodes miteinander zu verbinden (Kanten erstellen)
+	 */
 	private void connectNodes() {
 		for (int i = 0; i < this.graph.getNodes().size(); i++) {
 			Node currentNode = this.graph.getNodes().get(i);
@@ -39,6 +52,14 @@ public class PathFinder {
 			}
 		}
 	}
+	
+	/**
+	 * Fügt den Spieler und ein Monster in den Graphen ein.
+	 * @param player	Der Spieler
+	 * @param monster	Das Monster
+	 * @param quadController	Der QuadController für das vorliegende Feld
+	 * @param graph	Der Graph, in den der Spieler / das Monster integriert werden.
+	 */
 	private void integratePlayerAndMonsterIntoGraph(Player player, Monster monster, QuadController quadController, Graph graph) {
 		graph.setRoot(monster);
 		graph.setEnd(player);
@@ -56,6 +77,16 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * Diese Methode sucht nach weiteren Möglichkeiten, die das Monster brauchen kann, um zum Spieler zu gelangen,
+	 * indem es Geraden an die Player-Nodes anlegt und diese mit rechtwinkligen Geraden zu den anderen Nodes verbindet, 
+	 * um dann den Schnittpunkt hineinzufügen.
+	 * @param player	Der Spieler
+	 * @param monster	Das Monster
+	 * @param quadController	Der QuadController für das vorliegende Feld 
+	 * @param graph	Der momentane Graph
+	 * @throws UnexpectedException
+	 */
 	private void findAdditionalGraphNodesWithPerpendicularLineAtPointOfInterception(Player player, Monster monster, QuadController quadController, Graph graph) throws UnexpectedException {
 		Object clone = player.getConnections().clone();
 		if (!(clone instanceof ArrayList<?>)) {
@@ -87,7 +118,7 @@ public class PathFinder {
 				if (!quadController.testLineForObstacles(interception, monster.getPoint())) {
 					node.connectTo(monster);
 					// Hier müsste man eigentlich auch die anderen Nodes mit der neuen Verbinden,
-					// doch für Performance überspringen wir dies
+					// doch für Performance überspringen wir dies (noch)
 				} else {
 					for (Node graphNode : graph.getNodes()) {
 						if (graphNode.equals(node)) {
@@ -103,6 +134,13 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * Gibt den besten Pfad für das Monster um auf den Player zu schiessen zurück
+	 * @param monster	Das Monster, für das der Pfad generiert wird
+	 * @param player	Der Spieler
+	 * @param quadController	Der QuadController des Feldes
+	 * @return Den besten Pfad für das Monster
+	 */
 	public Path getBestPathToShootForMonster(Monster monster, Player player, QuadController quadController) {
 		try {
 			Graph graph = this.graph.clone();
@@ -125,6 +163,10 @@ public class PathFinder {
 		}
 	}
 
+	/**
+	 * Gibt den Graphen zurück
+	 * @return	Den Graphen
+	 */
 	public Graph getGraph() {
 		return graph;
 	}
