@@ -81,7 +81,7 @@ public class User {
 
 
     private void setPointsNullIfObstacle(){
-        System.out.println(getGame().getMonster().getPoint().getX() + " | " + getGame().getMonster().getPoint().getY() + " : " + getGame().getPlayer().getPoint().getX() + " | " + getGame().getPlayer().getPoint().getY());
+        //System.out.println(getGame().getMonster().getPoint().getX() + " | " + getGame().getMonster().getPoint().getY() + " : " + getGame().getPlayer().getPoint().getX() + " | " + getGame().getPlayer().getPoint().getY());
         if(getGame().getQuadController().testLineForObstacles(getGame().getMonster().getPoint(), getGame().getPlayer().getPoint())){
             points = null;
         }

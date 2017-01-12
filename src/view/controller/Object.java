@@ -9,11 +9,16 @@ import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 
+/*
+**
+** Dies ist eine Hilfsklasse, die eine erste Stufe zwischen Code und Grafikprozessor leistet.
+**
+*/
 public class Object {
 
 	public int vaoID;
 	public int count;
-    public Vector3f position;
+  public Vector3f position;
 
 	private VertexArrayObject vao;
 	private static byte[] indices = {

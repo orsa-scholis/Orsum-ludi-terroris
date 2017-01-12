@@ -8,6 +8,14 @@ import logic.graph.Graph;
 import logic.graph.Node;
 import logic.algorithm.DijkstraNode;
 
+/*
+**
+** Dies 
+**
+**
+**
+**
+*/
 public class Dijkstra {
 	private Node start;
 	private Node end;

@@ -78,7 +78,7 @@ public class PathFinder {
 				continue;
 			}
 
-			System.out.println("player: " + playerPosition + ", inter: aaa" + interception);
+			//System.out.println("player: " + playerPosition + ", inter: aaa" + interception);
 			if (!quadController.testLineForObstacles(playerPosition, interception)) {
 				Node node = new Node(interception);
 				node.connectTo(connection.getEnd());

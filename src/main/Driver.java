@@ -24,8 +24,8 @@ public class Driver {
 
 	private boolean running = false;
 	private long windows;
-	private int height = 330;
-	private int width = 330;
+	private int height = 1000;
+	private int width = 1000;
 	@SuppressWarnings("unused")
 	private GLFWKeyCallback keyCallback;
 	@SuppressWarnings("unused")
@@ -54,7 +54,7 @@ public class Driver {
 		};
 
 		game = new Game(field);
-		game.setMonsterPosition(new Point(0.9, 0.82));
+		game.setMonsterPosition(new Point(0.4, 0.82));
 		move = new Movement(this);
 		rend = new Renderer(this);
 		user = new User(this);
@@ -84,11 +84,7 @@ public class Driver {
 			System.err.println("Fenster konnte nicht erstellt werden!");
 		}
 
-		glfwSetKeyCallback(windows, (window, key, scancode, action, mods) -> {
-			System.out.println("Key callbacks");
-			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-				glfwSetWindowShouldClose(window, true); // We will detect this in our rendering loop
-		});
+		glfwSetKeyCallback(windows, keyCallback = new KeyboardInput());
 		glfwSetCursorPosCallback(windows, cursorCallback = new MouseInput());
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		glfwSetWindowPos(
@@ -131,7 +127,7 @@ public class Driver {
 			frames++;
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				System.out.println(updates + " UPS, " + frames + " FPS");
+				//System.out.println(updates + " UPS, " + frames + " FPS");
 			}
 			if(glfwWindowShouldClose(windows)){
 				running = false;
