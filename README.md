@@ -9,4 +9,4 @@ Das Projekt ist als eclipse Neon Projekt konfiguriert und kann einfach importier
 ![Importieren](https://github.com/TheFehr/monstergame/raw/master/dokumentation/import_projekt.png "Unter File Open Projekt from File System wählen")
 
 ### Dokumentation
-Alle Dokumentationsdateien sind im Ordner "dokumentation" zu finden
+Alle Dokumentationsdateien sind im Ordner "dokumentation" zu finden. Dort ist auch eine umfassende Dokumentation als "Projektdokumentation_monstergame.pdf" gespeichert.
