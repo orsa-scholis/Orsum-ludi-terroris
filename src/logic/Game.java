@@ -50,8 +50,6 @@ public class Game {
 
 	protected void setup() {
 		pathFinder = new PathFinder(quadController.getGraphNodesWithObstacles(), quadController);
-
-		//System.out.println(pathFinder.getGraph().toString(quadController.getDWidth()));
 	}
 
 	/**
@@ -72,7 +70,6 @@ public class Game {
 			writer = new BufferedWriter(new FileWriter(new File(path)));
 			writer.write(getExportStr());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (writer != null) {

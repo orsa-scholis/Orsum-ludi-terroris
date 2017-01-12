@@ -48,7 +48,8 @@ public class LinearFunction {
 	 * @return Der Schnittpunkt
 	 */
 	public Point getInterceptionPoint(LinearFunction secondFunction) {
-		if (secondFunction.getM() == this.getM()) { // Die Funktionen sind parallel => Entweder keine oder unendlich viele Schnittpunkte
+		if (secondFunction.getM() == this.getM()) { 
+			// Die Funktionen sind parallel => Entweder keine oder unendlich viele Schnittpunkte
 			return null;
 		}
 		

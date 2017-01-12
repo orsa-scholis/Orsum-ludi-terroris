@@ -2,6 +2,11 @@ package logic.graph;
 
 import java.util.ArrayList;
 
+/**
+ * Eine Node in dem Graphen
+ * @author Lukas Bischof
+ *
+ */
 public class Node {
 	private ArrayList<Connection> connections = new ArrayList<>();
 	private Point point;
@@ -22,6 +27,10 @@ public class Node {
 		this.id = Node.currentIdCounter++;
 	}
 	
+	/**
+	 * Verbindet diese Node mit einer anderen
+	 * @param nodeToConnect	Die Node, mit welcher diese Node verbunden werden soll
+	 */
 	public void connectTo(Node nodeToConnect) {
 		if (nodeToConnect.equals(this)) {
 			System.out.println("(Node) Cannot connect to itself");

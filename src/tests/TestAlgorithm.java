@@ -29,7 +29,7 @@ public class TestAlgorithm {
 		{ 0, 0, 0, 0, 0, 0, 0, 0 }
 		// Top
 	};
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -45,28 +45,28 @@ public class TestAlgorithm {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	@Test
 	public void testGraphClone() {
 		Game game = new Game(field);
 		game.setMonsterPosition(new Point(0.9, 0.82));
 		game.getPathForMonster();
-		
+
 		try {
 			Graph copy = (Graph)game.getPathFinder().getGraph().clone();
 			Graph original = game.getPathFinder().getGraph();
-			
+
 			for (int i = 0; i < original.getNodes().size(); ++i) {
 				Node originalNode = original.getNodes().get(i);
 				Node clonedNode = copy.getNodes().get(i);
-				
+
 				if (!originalNode.getPoint().equals(clonedNode.getPoint())) {
 					fail("Points missmatch");
 				}
-				
+
 				for (Connection connection : originalNode.getConnections()) {
 					Node originalCounterpart = connection.getCounterpart(originalNode);
-					
+
 					boolean hasConnection = false;
 					for (Connection clonedConnection : clonedNode.getConnections()) {
 						if (clonedConnection.getCounterpart(clonedNode).getPoint().equals(originalCounterpart.getPoint())) {
@@ -74,7 +74,7 @@ public class TestAlgorithm {
 							break;
 						}
 					}
-					
+
 					if (!hasConnection) {
 						fail("The node " + originalNode + " has no connection to the node " + originalCounterpart + " in the clone");
 					}
@@ -89,44 +89,40 @@ public class TestAlgorithm {
 	@Test
 	public void testPerformance() {
 		long start = System.currentTimeMillis();
-		
+
 		Game game = new Game(field);
 		game.setMonsterPosition(new Point(0.9, 0.82));
 		Path path = game.getPathForMonster();
 		if (null == path) {
 			fail("Can't measure performance. Missing returned path");
 		}
-		
+
 		long end = System.currentTimeMillis();
 		long elapsedTime = end - start;
 	    System.out.println("Performance of algorithm: " + elapsedTime + "ms elapsed");
 	}
-	
+
 	@Test
 	public void testPerformancePerCalculation() {
 		Game game = new Game(field);
 		game.setMonsterPosition(new Point(0.9, 0.82));
-		
+
 		long avg = 0;
 		int itr = 100;
 		for (int i = 0; i < itr; i++) {
 			long start = System.currentTimeMillis();
-			
-			/*System.out.println(i + ":");
-			System.out.println(game.getPathFinder().getGraph().uniqueExportString());*/
-			
+
 			Path path = game.getPathForMonster();
 			if (null == path) {
 				fail("Can't measure performance. Missing returned path");
 			}
-			
+
 			long end = System.currentTimeMillis();
 			long elapsedTime = end - start;
 		    avg += elapsedTime;
 		}
-		
+
 		System.out.println("Average time elapsed per calculation: " + ((double)avg / (double)itr) + " ms.");
 	}
 
 }
-
