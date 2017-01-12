@@ -5,8 +5,12 @@ import org.lwjgl.BufferUtils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+
+import javax.annotation.Resource;
 
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
@@ -18,11 +22,11 @@ import static org.lwjgl.opengl.GL20.*;
 */
 public class Utilities {
 
-	public static int loadShader(String filepath, int type){
+	public static int loadShader(InputStream input, int type){
 		BufferedReader reader = null;
 		StringBuilder result = new StringBuilder();
 		try{
-			reader = new BufferedReader(new FileReader(filepath));
+			reader = new BufferedReader(new InputStreamReader(input));
 			String buffer = "";
 			while((buffer = reader.readLine()) != null){
 				result.append(buffer);

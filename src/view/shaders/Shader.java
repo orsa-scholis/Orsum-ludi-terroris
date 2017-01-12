@@ -1,4 +1,4 @@
-package view.graphicEngine;
+package view.shaders;
 
 import view.utils.Vector3f;
 
@@ -18,8 +18,8 @@ public class Shader {
 	private int fragmentShaderID;
 
 	public Shader(String vertexFile, String fragmentFile) {
-		vertexShaderID = loadShader(getClass().getResourceAsStream(vertexFile), GL_VERTEX_SHADER);
-		fragmentShaderID = loadShader(getClass().getResourceAsStream(fragmentFile), GL_FRAGMENT_SHADER);
+		vertexShaderID = loadShader(Shader.class.getResourceAsStream(vertexFile), GL_VERTEX_SHADER);
+		fragmentShaderID = loadShader(Shader.class.getResourceAsStream(fragmentFile), GL_FRAGMENT_SHADER);
 
 		programID = glCreateProgram();
 		glAttachShader(programID, fragmentShaderID);
