@@ -15,11 +15,19 @@ import logic.Game;
 import logic.graph.Point;
 import view.Renderer;
 import view.controller.Movement;
-import view.controller.User;
+import view.controller.Updater;
 import view.graphicEngine.ShaderManager;
 import view.input.KeyboardInput;
 import view.input.MouseInput;
 
+/**
+ *
+ * Dies ist die Main-Klasse.
+ * Sie regelt das Initialisieren und verwalten aller für das Programm wichtige Objekte.
+ *
+ * @author Philipp
+ *
+ */
 public class Driver {
 
 	private boolean running = false;
@@ -35,11 +43,14 @@ public class Driver {
 	private Movement move;
 	private ShaderManager shaderMan;
 	private Renderer rend;
-	private User user;
+	private Updater user;
 
     public static int FIELD = 0;
     public static int OBSTACLE = 1;
 
+    /**
+     *
+     */
 	public void init(){
 
 		int[][] field = new int[][] {
@@ -57,7 +68,7 @@ public class Driver {
 		game.setMonsterPosition(new Point(0.4, 0.82));
 		move = new Movement(this);
 		rend = new Renderer(this);
-		user = new User(this);
+		user = new Updater(this);
 		running = true;
 	}
 
@@ -105,6 +116,7 @@ public class Driver {
 	}
 
 
+	@SuppressWarnings("unused")
 	public void run(){
 		long lastTime = System.nanoTime();
 		double delta = 0.0;
@@ -151,6 +163,10 @@ public class Driver {
 		rend.render();
 	}
 
+	/**
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Driver driver = new Driver();
 		driver.init();

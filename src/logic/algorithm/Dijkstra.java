@@ -12,9 +12,7 @@ import logic.algorithm.DijkstraNode;
 *
 * Diese Klasse implementiert den Dijkstra-Algorithmus.
 *
-* Dazu benÃ¶tig sie die start-Node, die end-Node, eine Liste aller Nodes (allNodes) und eine Liste aller DijkstraNodes (diese wird generiert).
-*
-* Die Funktion getShortestWaysPath gibt einen Path zurÃ¼ck, der den kÃ¼rzesten mÃ¶glichen Pfad reprÃ¤sentiert.
+* Dazu benötig sie die start-Node, die end-Node, eine Liste aller Nodes (allNodes) und eine Liste aller DijkstraNodes (diese wird generiert
 *
 */
 public class Dijkstra {
@@ -41,15 +39,18 @@ public class Dijkstra {
 		}
 	}
 
+/**
+ *
+ * Implementation von Dijkstra.
+ *
+ * @return Path Der kürzeste errechnete Pfad.
+ */
 	public Path getShortestWaysPath() {
 		DijkstraNode activeNode = findNodeWithShortestLength();
 		while (activeNode.getMe() != end) {
-//			System.out.println("buf" + allNodesAsDN.indexOf(activeNode) + activeNode.isChecked());
 			activeNode = findNodeWithShortestLength();
 			activeNode.setChecked();
 			for (Connection conn : activeNode.getMe().getConnections()) {
-//				System.out.println(conn.getEnd().getPoint().getX() + ":" + conn.getEnd().getPoint().getY() + " -- "
-//						+ conn.getStart().getPoint().getX() + ":" + conn.getStart().getPoint().getY());
 				if (!getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).isChecked()) {
 					if (getDnodeFromNode(getTargetNode(conn, activeNode.getMe())).getLength() > activeNode.getLength()
 							+ conn.getLength()) {
@@ -64,6 +65,12 @@ public class Dijkstra {
 		return getPathAsArrayList();
 	}
 
+	/**
+	 *
+	 * Sucht in der ArrayList allNodesAsDN nach dem Knoten mit der kürzesten Distanz, der noch nicht abgearbeitet wurde.
+	 *
+	 * @return DijkstraNode
+	 */
 	private DijkstraNode findNodeWithShortestLength() {
 		DijkstraNode shortest = new DijkstraNode(new Node(null));
 
@@ -77,6 +84,13 @@ public class Dijkstra {
 		return shortest;
 	}
 
+	/**
+	 *
+	 * Gibt die DijkstraNode zurück, welche die node als me gespeichert hat.
+	 *
+	 * @param node Eine Node aus der allNodes ArrayList.
+	 * @return DijkstraNode Die DijkstraNode, die die node als me gespeichert hat.
+	 */
 	private DijkstraNode getDnodeFromNode(Node node) {
 		try{
 		if (allNodesAsDN.get(allNodes.indexOf(node)).getMe() == node) {
@@ -94,6 +108,14 @@ public class Dijkstra {
 		return null;
 	}
 
+	/**
+	 *
+	 * Gibt die gegenüberliegende Node einer Connection zurück.
+	 *
+	 * @param conn Die Connection aus der man die gegenüberliegende sucht.
+	 * @param node Die Node die man bereits kennt.
+	 * @return Die Node die auf der anderen Seite der Connection liegt.
+	 */
 	private Node getTargetNode(Connection conn, Node node) {
 		if (conn.getEnd() == node) {
 			return conn.getStart();
@@ -101,6 +123,12 @@ public class Dijkstra {
 		return conn.getEnd();
 	}
 
+	/**
+	 *
+	 * Gibt den berechneten Pfad als ArrayList zurück.
+	 *
+	 * @return Path Der errechnete Pfad.
+	 */
 	private Path getPathAsArrayList() {
 		ArrayList<Node> out = new ArrayList<>();
 		DijkstraNode activeNode = getDnodeFromNode(end);

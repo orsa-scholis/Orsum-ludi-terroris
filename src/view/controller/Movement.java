@@ -7,8 +7,8 @@ import main.Driver;
 
 /**
 *
-* Diese Klasse kÃ¼mmert sich um die Bewegung des Monsters und des Spielers.
-* Hierbei werden die DatensÃ¤tze des jeweiligen angepasst und im nÃ¤chsten Rendervorgang neu gerendert.
+* Diese Klasse kümmert sich um die Bewegung des Monsters und des Spielers.
+* Hierbei werden die Datensätze des jeweiligen angepasst und im nächsten Rendervorgang neu gerendert.
 *
 */
 public class Movement {
@@ -19,15 +19,9 @@ public class Movement {
 	public static int LEFT = 3;
 
 	private Driver driver;
-	private int moveCount;
-	private double moveDistanceX;
-	private double moveDistanceY;
 
 	public Movement(Driver driver) {
 		this.driver = driver;
-		this.moveCount = 120;
-		this.moveDistanceX = 0.0;
-		this.moveDistanceY = 0.0;
 	}
 
 	public boolean move(Node nd, int direction) {
@@ -71,6 +65,14 @@ public class Movement {
 		return true;
 	}
 
+	/**
+	 *
+	 * Überprüft ob an dem angegebenen Punkt ein Hinderniss ist.
+	 *
+	 * @param x Die x-Koordinate, des überprüften Punktes
+	 * @param y Die y-Koordinate, des überprüften Punktes
+	 * @return Gibt zurück ob, an dem angegebene Punkt ein Hinderniss ist.
+	 */
 	public boolean isThereNoObstacle(double x, double y) {
 		QuadController c = driver.getGame().getQuadController();
 		try {
@@ -84,17 +86,14 @@ public class Movement {
 		return true;
 	}
 
-	public void setupMonsterMovement(Node mst, Point point){
-		moveDistanceX = (point.getX() - mst.getPoint().getX()) / moveCount;
-		moveDistanceY = (point.getY() - mst.getPoint().getY()) / moveCount;
-	}
-
-	public boolean moveTo(Node nd, Point point) {
-		Point newP = new Point(nd.getPoint().getX() + moveDistanceX, nd.getPoint().getY() + moveDistanceY);
-
-		nd.setPoint(newP);
-
-		return false;
+	/**
+	 * Bewegt die Node an den neuen Punkt.
+	 *
+	 * @param nd Die Node die bewegt werden soll.
+	 * @param point Der Punkt an den die Node bewegt werden soll.
+	 */
+	public void moveTo(Node nd, Point point) {
+		nd.setPoint(point);
 	}
 
 }
