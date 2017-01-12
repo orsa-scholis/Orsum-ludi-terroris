@@ -7,10 +7,10 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 import static view.utils.Utilities.*;
 
-/*
-**
-** Diese Hilfsklasse steht eine Stufe näher bei dem Grafikprozessor als die Object-Klasse.
-**
+/**
+*
+* Diese Hilfsklasse steht eine Stufe näher bei dem Grafikprozessor als die Object-Klasse.
+*
 */
 public class VertexArrayObject {
 

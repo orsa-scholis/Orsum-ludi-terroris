@@ -4,10 +4,10 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
-/*
-**
-** Diese Klasse kümmert sich darum, dass man KeyboardInputs abfangen und verwerten kann.
-**
+/**
+*
+* Diese Klasse kümmert sich darum, dass man KeyboardInputs abfangen und verwerten kann.
+*
 */
 public class KeyboardInput extends GLFWKeyCallback {
 

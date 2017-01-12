@@ -8,13 +8,14 @@ import logic.graph.Graph;
 import logic.graph.Node;
 import logic.algorithm.DijkstraNode;
 
-/*
-**
-** Dies 
-**
-**
-**
-**
+/**
+*
+* Diese Klasse implementiert den Dijkstra-Algorithmus.
+*
+* Dazu benötig sie die start-Node, die end-Node, eine Liste aller Nodes (allNodes) und eine Liste aller DijkstraNodes (diese wird generiert).
+*
+* Die Funktion getShortestWaysPath gibt einen Path zurück, der den kürzesten möglichen Pfad repräsentiert.
+*
 */
 public class Dijkstra {
 	private Node start;

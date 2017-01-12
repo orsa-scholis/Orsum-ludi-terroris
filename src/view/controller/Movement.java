@@ -5,11 +5,11 @@ import logic.graph.Node;
 import logic.graph.Point;
 import main.Driver;
 
-/*
-**
-** Diese Klasse kümmert sich um die Bewegung des Monsters und des Spielers.
-** Hierbei werden die Datensätze des jeweiligen angepasst und im nächsten Rendervorgang neu gerendert.
-**
+/**
+*
+* Diese Klasse kümmert sich um die Bewegung des Monsters und des Spielers.
+* Hierbei werden die Datensätze des jeweiligen angepasst und im nächsten Rendervorgang neu gerendert.
+*
 */
 public class Movement {
 

@@ -2,10 +2,10 @@ package view.input;
 
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 
-/*
-**
-** Diese Klasse kümmert sich darum, dass man MouseInputs abfangen und verwerten kann.
-**
+/**
+*
+* Diese Klasse kümmert sich darum, dass man MouseInputs abfangen und verwerten kann.
+*
 */
 public class MouseInput extends GLFWCursorPosCallback {
 

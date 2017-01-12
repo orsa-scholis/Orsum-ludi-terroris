@@ -6,10 +6,10 @@ import static org.lwjgl.opengl.GL20.*;
 import static view.utils.Utilities.*;
 import static view.utils.Utilities.loadShader;
 
-/*
-**
-** Diese ist eine Hilfsklasse die für die Initialiserung von vertexShader-Dateien und FragmentShader-Dateien sorgt.
-**
+/**
+*
+* Diese ist eine Hilfsklasse die für die Initialiserung von vertexShader-Dateien und FragmentShader-Dateien sorgt.
+*
 */
 public class Shader {
 

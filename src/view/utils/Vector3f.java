@@ -1,9 +1,9 @@
 package view.utils;
 
-/*
-**
-** Dies ist eine OpenGl-Hilfsklasse.
-**
+/**
+*
+* Dies ist eine OpenGl-Hilfsklasse.
+*
 */
 public class Vector3f {
 
