@@ -8,9 +8,9 @@ import logic.Index2D;
 import logic.Quad;
 import main.Driver;
 import view.controller.Object;
+import view.shaders.Shader;
 import logic.graph.Monster;
 import logic.graph.Player;
-import view.graphicEngine.Shader;
 
 /**
 *

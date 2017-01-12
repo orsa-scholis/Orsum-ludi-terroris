@@ -1,5 +1,7 @@
 package view.graphicEngine;
 
+import view.shaders.Shader;
+
 /**
 *
 * Diese Klasse kÃ¼mmert sich um das Verwalten von Shadern.
