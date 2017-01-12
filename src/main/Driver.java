@@ -49,7 +49,7 @@ public class Driver {
     public static int OBSTACLE = 1;
 
     /**
-     *
+     * Setup aller benötigten Objekten und statischen Elemente.
      */
 	public void init(){
 
@@ -72,7 +72,9 @@ public class Driver {
 		running = true;
 	}
 
-
+	/**
+	 * Setup von OpenGl und der GUI.
+	 */
 	public void graficInit(){
 		if (Platform.get() == Platform.MACOSX) {
 			java.awt.Toolkit.getDefaultToolkit();
@@ -115,12 +117,14 @@ public class Driver {
 		shaderMan = ShaderManager.getInstance();
 	}
 
-
+	/**
+	 * Der eigentliche "Kontroller", ruft 30 mal pro Sekunde update() und render() auf.
+	 */
 	@SuppressWarnings("unused")
 	public void run(){
 		long lastTime = System.nanoTime();
 		double delta = 0.0;
-		double ns = 1000000000.0 / 60.0;
+		double ns = 1000000000.0 / 30.0;
 		long timer = System.currentTimeMillis();
 		int updates = 0;
 		int frames = 0;
@@ -152,11 +156,17 @@ public class Driver {
 		glfwSetErrorCallback(null).free();
 	}
 
+	/**
+	 * Ruft die udate() Methode von Updater auf.
+	 */
 	private void update(){
 		glfwPollEvents();
 		user.update();
 	}
 
+	/**
+	 * Ruft die render() Methode von Renderer auf.
+	 */
 	private void render(){
 		glfwSwapBuffers(windows);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -164,8 +174,8 @@ public class Driver {
 	}
 
 	/**
+	 * Die Main-Methode.
 	 *
-	 * @param args
 	 */
 	public static void main(String[] args) {
 		Driver driver = new Driver();

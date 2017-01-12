@@ -26,6 +26,9 @@ public class Renderer {
 		this.driver = driver;
 	}
 
+	/**
+	 * Jeder Quad, sowie der Spieler und das Monster werden gerendert.
+	 */
 	public void render() {
 
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -56,6 +59,11 @@ public class Renderer {
 
 	}
 
+	/**
+	 * Rendert ein Object mit einem Shader.
+	 * @param shader Den Shader denn man gerne hätte.
+	 * @param vertices Die vertices die das Object haben soll.
+	 */
 	private void drawWithShader(Shader shader, float[] vertices){
 		Object object = new Object(vertices);
 
@@ -65,6 +73,13 @@ public class Renderer {
 		shader.stop();
 	}
 
+	/**
+	 * Berechnet die Vertices.
+	 * @param size Die Grösse die das Object haben soll.
+	 * @param x Die X-Koordinate des Object.
+	 * @param y Die Y-Koordinate des Object.
+	 * @return float[], die berechneten Vertices.
+	 */
 	private float[] calcVertices(float size, float x, float y){
 
 		float px = (x * 2.0f) - 1.0f;
