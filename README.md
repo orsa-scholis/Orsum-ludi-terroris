@@ -1,4 +1,4 @@
-# monstergame
+# Orsum Ludi Terroris (Das Vorhaben des Spiel des Schreckens alias "Monstergame")
 Das Monstergame schlecht hin!
 
 ## Das Ziel
