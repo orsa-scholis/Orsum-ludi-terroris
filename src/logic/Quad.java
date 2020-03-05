@@ -2,37 +2,37 @@ package logic;
 
 /**
  * Repräsentiert ein Quadrat auf dem Spielfeld. Dies kann entweder ein freies Feld oder ein Hindernis sein.
- * @author lukasbischof
  *
+ * @author lukasbischof
  */
 public class Quad {
-	private Index2D index;
-	private boolean isObstacle;
-	
-	public Quad(Index2D index, boolean isObstacle) {
-		this.index = index;
-		this.isObstacle = isObstacle;
-	}
-	
-	public Quad(Index2D index) {
-		this.index = index;
-		this.isObstacle = false;
-	}
+    private Index2D index;
+    private boolean isObstacle;
 
-	public Index2D getIndex() {
-		return index;
-	}
+    public Quad(Index2D index, boolean isObstacle) {
+        this.index = index;
+        this.isObstacle = isObstacle;
+    }
 
-	public void setIndex(Index2D index) {
-		this.index = index;
-	}
+    public Quad(Index2D index) {
+        this.index = index;
+        this.isObstacle = false;
+    }
 
-	public boolean isObstacle() {
-		return isObstacle;
-	}
+    public Index2D getIndex() {
+        return index;
+    }
 
-	public void setObstacle(boolean isObstacle) {
-		this.isObstacle = isObstacle;
-	}
+    public void setIndex(Index2D index) {
+        this.index = index;
+    }
+
+    public boolean isObstacle() {
+        return isObstacle;
+    }
+
+    public void setObstacle(boolean isObstacle) {
+        this.isObstacle = isObstacle;
+    }
 }
  
