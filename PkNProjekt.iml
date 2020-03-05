@@ -47,5 +47,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="lwjgl-opengl-javadoc" level="project" />
+    <orderEntry type="library" name="lwjgl-javadoc" level="project" />
   </component>
 </module>

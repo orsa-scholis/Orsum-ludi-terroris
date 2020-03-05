@@ -1,5 +1,5 @@
 /**
- * 
+ * @author lukasbischof
  */
 /**
  * @author lukasbischof

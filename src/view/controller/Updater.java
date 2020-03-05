@@ -5,71 +5,64 @@ import logic.graph.Point;
 import main.Driver;
 import view.input.KeyboardInput;
 
-import static view.controller.Movement.*;
-
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.*;
+import static view.controller.Movement.*;
 
 /**
- *
- * Diese Klasse kümmert sich darum, dass die Datensätze von Monster und Spieler aktualisert werden.
+ * Diese Klasse kï¿½mmert sich darum, dass die Datensï¿½tze von Monster und Spieler aktualisert werden.
  * Beim Monster passiert dies von Aufruf zu Aufruf, da das Monster dem Pfad folgt.
- * Beim Spieler ändern sich die Daten nur, wenn eine Eingabe per Tastatur vorgenommen wurde.
+ * Beim Spieler ï¿½ndern sich die Daten nur, wenn eine Eingabe per Tastatur vorgenommen wurde.
  *
  * @author Philipp
- *
  */
 public class Updater {
     private Driver driver;
     private ArrayList<Point> points;
-	private long monsterTimer;
-	private float velocity;
+    private long monsterTimer;
+    private float velocity;
 
     /**
      * Updater-Konstruktor
      *
-     * @param driver Um auf die Daten des Monsters und des Spielers zugreifen zu können muss dem Updated, der Driver mitgegeben werden.
+     * @param driver Um auf die Daten des Monsters und des Spielers zugreifen zu kï¿½nnen muss dem Updated, der Driver mitgegeben werden.
      */
     public Updater(Driver driver) {
         this.driver = driver;
         points = null;
         velocity = 0.00001f;
 
-    	refreshMonsterPath();
+        refreshMonsterPath();
     }
 
-	/**
-	 *
-	 * Diese Funktion wird bei jedem Frame aufgerufen.
-	 * Sie berechnet den neuen Punkt für das Monster und falls Tastatureingaben vorgenommen werden, einen neuen Punkt für den Spieler
-	 *
-	 */
+    /**
+     * Diese Funktion wird bei jedem Frame aufgerufen.
+     * Sie berechnet den neuen Punkt fï¿½r das Monster und falls Tastatureingaben vorgenommen werden, einen neuen Punkt fï¿½r den Spieler
+     */
     public void update() {
         if (points == null) {
-        	System.out.println("Refresh!");
-        	refreshMonsterPath();
-        }
-        else{
-        	double deltaT = System.currentTimeMillis() - monsterTimer;
-        	double length = deltaT * velocity;
+            System.out.println("Refresh!");
+            refreshMonsterPath();
+        } else {
+            double deltaT = System.currentTimeMillis() - monsterTimer;
+            double length = deltaT * velocity;
 
-	    	Point[] wAIpoints = whereAmI(length);
+            Point[] wAIpoints = whereAmI(length);
 
-	    	double deltaX = wAIpoints[1].getX() - wAIpoints[0].getX();
-	    	double deltaY = wAIpoints[1].getY() - wAIpoints[0].getY();
+            double deltaX = wAIpoints[1].getX() - wAIpoints[0].getX();
+            double deltaY = wAIpoints[1].getY() - wAIpoints[0].getY();
 
-	    	double percent = length / calcLength(wAIpoints[0], wAIpoints[1]);
+            double percent = length / calcLength(wAIpoints[0], wAIpoints[1]);
 
-	    	if(percent <= 1){
-		    	Point newP = new Point(wAIpoints[0].getX() + deltaX * percent, wAIpoints[0].getY() + deltaY * percent);
-		    	getMove().moveTo(getGame().getMonster(), newP);
-		    }
-	    	else{
-	    		if(getGame().getQuadController().testLineForObstacles(getGame().getPlayer().getPoint(), getGame().getMonster().getPoint())){
-	    			refreshMonsterPath();
-	    		}
-	    	}
+            if (percent <= 1) {
+                Point newP = new Point(wAIpoints[0].getX() + deltaX * percent, wAIpoints[0].getY() + deltaY * percent);
+                getMove().moveTo(getGame().getMonster(), newP);
+            } else {
+                if (getGame().getQuadController().testLineForObstacles(getGame().getPlayer().getPoint(), getGame().getMonster().getPoint())) {
+                    refreshMonsterPath();
+                }
+            }
         }
 
         if (KeyboardInput.isKeyDown(GLFW_KEY_W)) {
@@ -91,44 +84,43 @@ public class Updater {
     }
 
     /**
-     * Generiert den Pfad für das Monster neu.
+     * Generiert den Pfad fï¿½r das Monster neu.
      */
-    private void refreshMonsterPath(){
-    	points = getGame().getPathForMonster().getPoints();
-        points.remove(points.size()-1);
+    private void refreshMonsterPath() {
+        points = getGame().getPathForMonster().getPoints();
+        points.remove(points.size() - 1);
         monsterTimer = System.currentTimeMillis();
     }
 
     /**
-     * Gibt zurück zwischen welchen zwei Punkten das Monster im Moment ist.
+     * Gibt zurï¿½ck zwischen welchen zwei Punkten das Monster im Moment ist.
      *
-     * @param rest Die bereits gefahrene Länge des Monsters
+     * @param rest Die bereits gefahrene Lï¿½nge des Monsters
      * @return Point[] in dem Array befinden sich zwei Punkte, zwischen diesen zwei Punkten befindet sich das Monster.
      */
-    private Point[] whereAmI(double rest){
-    	int point = 1;
-    	for(int i = 1; i < points.size(); i++){
+    private Point[] whereAmI(double rest) {
+        int point = 1;
+        for (int i = 1; i < points.size(); i++) {
 
-    		double length = calcLength(points.get(i-1), points.get(i));
+            double length = calcLength(points.get(i - 1), points.get(i));
 
-    		if(rest > length){
-    			rest += length - calcLength(points.get(i-1), points.get(i));
-    			point = i;
-    		}
-    	}
-    	return new Point[]{points.get(point-1), points.get(point)};
+            if (rest > length) {
+                rest += length - calcLength(points.get(i - 1), points.get(i));
+                point = i;
+            }
+        }
+        return new Point[] { points.get(point - 1), points.get(point) };
     }
 
     /**
-     *
      * Satz des Pythagoras - Implementation
      *
      * @param one Punkt eins
      * @param two Punkt zwei
-     * @return double, die Länge zwischen Punkt eins und zwei.
+     * @return double, die Lï¿½nge zwischen Punkt eins und zwei.
      */
-    private double calcLength(Point one, Point two){
-    	return Math.abs( Math.pow((one.getX() - two.getX()), 2) + Math.pow((one.getY() - two.getY()), 2) );
+    private double calcLength(Point one, Point two) {
+        return Math.abs(Math.pow((one.getX() - two.getX()), 2) + Math.pow((one.getY() - two.getY()), 2));
     }
 
     private Game getGame() {
